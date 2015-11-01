@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2015-10-24 14:12:07
+<?php /* Smarty version 3.1.27, created on 2015-11-01 10:36:01
          compiled from "templates/inc/header.html" */ ?>
 <?php
-/*%%SmartyHeaderCode:2098993955562b7597d89c60_46899492%%*/
+/*%%SmartyHeaderCode:1681817895635dd01448c44_47287443%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,25 +9,20 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ec9d010c8f7f157ba31ca2b1675b4cfc9a6b9859' => 
     array (
       0 => 'templates/inc/header.html',
-      1 => 1445688687,
+      1 => 1446370518,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2098993955562b7597d89c60_46899492',
-  'variables' => 
-  array (
-    'style' => 0,
-    'ROOT' => 0,
-  ),
+  'nocache_hash' => '1681817895635dd01448c44_47287443',
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_562b7597ded743_46121310',
+  'unifunc' => 'content_5635dd01497bb0_27916930',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_562b7597ded743_46121310')) {
-function content_562b7597ded743_46121310 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5635dd01497bb0_27916930')) {
+function content_5635dd01497bb0_27916930 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '2098993955562b7597d89c60_46899492';
+$_smarty_tpl->properties['nocache_hash'] = '1681817895635dd01448c44_47287443';
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -42,71 +37,75 @@ $_smarty_tpl->properties['nocache_hash'] = '2098993955562b7597d89c60_46899492';
 
     <title>title</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="media/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="media/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="media/css/owl.transitions.css"/>
+    <link rel="stylesheet" type="text/css" href="media/css/owl.carousel.css"/>
+    <link rel="stylesheet" type="text/css" href="media/css/animate.css"/>
+    <link rel="stylesheet" type="text/css" href="media/css/main.css"/>
 
-    <!-- CSS -->
-    <link href="media/css/main.css" rel="stylesheet">
-    <link href="media/css/<?php echo $_smarty_tpl->tpl_vars['style']->value;?>
-.css" rel="stylesheet">
-    <link rel="stylesheet" href="media/css/slimbox.css" type="text/css" media="screen" />
-        
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING:<link href="media/css/main.css" rel="stylesheet">.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
     <?php echo '<script'; ?>
- src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"><?php echo '</script'; ?>
+ type="text/javascript" src="media/js/jquery.js"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
- src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"><?php echo '</script'; ?>
+ type="text/javascript" src="media/js/ajaxchimp.js"><?php echo '</script'; ?>
 >
-    <![endif]-->
-
-    <!-- fonty -->
-    <link href="media/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <?php echo '<script'; ?>
+ type="text/javascript" src="media/js/scrollTo.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ type="text/javascript" src="media/js/owl.carousel.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ type="text/javascript" src="media/js/wow.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ type="text/javascript" src="media/js/parallax.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ type="text/javascript" src="media/js/nicescroll.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ type="text/javascript" src="media/js/main.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ type="text/javascript" src="media/js/bootstrap.js"><?php echo '</script'; ?>
+>
 
 </head>
 
 <body>
-<!-- Navigation -->
-<div id="navigation" role="banner">
-    <div class="container">
-        <div id="navbar" class="navbar navbar-default">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/procha_projekt_git"></a>
+
+    <!--  Header Section  -->
+    <header>
+        <div class="container">
+            <div class="logo pull-left animated wow fadeInLeft">
+                <!--<img src="media/img/logo.png" alt="" title="">-->
+                <div id="logo_menu"></div>
             </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/procha_projekt_git">Domů</a></li>
-                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['ROOT']->value;?>
-/galerie">Fotogalerie</a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" href="#">Dropdown<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Link 1</a></li>
-                            <li><a href="#">Link 2</a></li>
-                            <li><a href="#">Link 3</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#about-us">About Us</a></li>
-                    <li><a href="<?php echo $_smarty_tpl->tpl_vars['ROOT']->value;?>
-/kontakt">Contact</a></li>
+
+
+            <nav class="pull-left">
+                <ul class="list-unstyled">
+                    <li class="animated wow fadeInLeft" data-wow-delay="0s"><a href="#about">O nás</a></li>
+                    <li class="animated wow fadeInLeft" data-wow-delay=".2s"><a href="#">Naše vína</a></li>
+                    <li class="animated wow fadeInLeft" data-wow-delay=".1s"><a href="#">Ubytování</a></li>
+                    <li class="animated wow fadeInLeft" data-wow-delay=".2s"><a href="#">Kontakt</a></li>
+                </ul>
+            </nav>
+
+            <div class="social pull-right">
+                <ul class="list-unstyled">
+                    <li class="animated wow fadeInRight" data-wow-delay=".2s"><a href="#"><img src="media/img/facebook.png" alt="" title=""></a></li>
+                    <li class="animated wow fadeInRight" data-wow-delay=".1s"><a href="#"><img src="media/img/twitter.png" alt="" title=""></a></li>
+                    <li class="animated wow fadeInRight" data-wow-delay="0s"><a href="#"><img src="media/img/google.png" alt="" title=""></a></li>
                 </ul>
             </div>
+
+            <span class="burger_icon">menu</span>
         </div>
-    </div>
-</div><?php }
+    </header>
+    <!--  End Header Section  -->
+<?php }
 }
 ?>
