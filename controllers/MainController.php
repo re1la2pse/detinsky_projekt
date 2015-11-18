@@ -17,6 +17,10 @@ class MainController {
                 self::frontPage();
             break;
 
+            case "error":
+                self::errorPage();
+            break;
+
             default:
                 echo "Tato stránka neexituje";
         }
@@ -26,10 +30,20 @@ class MainController {
 
         $smarty = Utils::smartyInit();
 
-        $smarty->assign('style', 'frontPage_style');
+        //styly pro frontpage jsou v main.css
+        //$smarty->assign('style', 'frontPage_style');
         $smarty->display('frontPage.html');
         exit;
         
+    }
+
+    public static function errorPage() {
+
+        //dodelat predani chybove hlasky
+
+        $smarty = Utils::smartyInit();
+        $smarty->display('error.html');
+        exit;
     }
 
 } 
