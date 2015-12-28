@@ -119,6 +119,11 @@ header .burger_icon{
 	margin: 20px 10px 0 0;
 }
 
+#menu {
+    position: fixed;
+    top: 0;
+}
+
 header .burger_icon:hover{
 	cursor: pointer;
 }
@@ -128,21 +133,21 @@ header .burger_icon.active{
 	color: #ffffff;
 }
 
-header nav{
+header #navigace{
 	margin-top: 17px;
 	display: table-cell;
 }
 
-header nav li{
+header #navigace li{
 	float: left;
 	margin-left: 20px;
 }
 
-header nav li:first-child{
+header #navigace li:first-child{
 	margin: 0;
 }
 
-header nav li a{
+header #navigace li a{
 	display: block;
 	color: #fff;
 	font-family: "open_regular", Helvetica, Arial, sans-serif;
@@ -156,36 +161,20 @@ header nav li a{
 	-webkit-transition: all .2s linear;
 }
 
-header nav li a:hover,
-header nav li a:focus{
+header #navigace li a:hover,
+header #navigace li a:focus{
 	text-decoration: none;
 	color: #41c17d!important;
 	border-radius: 5px;
 	background-color: white;
 }
 
-header .social{
-	display: table-cell;
-	margin-top: 20px;
-}
-
-header .social li{
-	float: left;
-	margin-left: 20px;
-}
-
-header .social li:first-child{
-	margin: 0;
-}
-
-
-
-
 
 /* Slider */
 #myCarousel {
     /*height: 600px;*/
     height: 60%;
+    margin-top: 70px;
 }
 
 .item,
@@ -318,6 +307,11 @@ header .social li:first-child{
     font-weight: bold;
 }
 
+.content {
+    border: 1px solid blue;
+    padding: 50px 10px;
+}
+
 
 
 
@@ -343,54 +337,20 @@ footer{
 
 @media (max-width: 767px) {
 
-
-	/*		Header 		*/
-	header .logo{
-		margin-right: 0;
-	}
-
-	header .burger_icon{
-		display: block;
-	}
-
-	header nav{
-		width: 100%;
-		float: none;
-		background: #47ad76;
-		position: absolute;
-		margin-top: 70px;
-		left: 0;
-		display: none;
-	}
-
-	header nav.show{
-		display: block;
-	}
-
-
-	header nav li{
+	header #navigace li{
 		display: block;
 		width: 100%;
 		margin: 0;
 		text-align: center;
+
 	}
 
-	header nav li a{
+	header #navigace li a{
 		display: block;
-		width: 100%;	
+		width: 100%;
 		padding: 20px 0;
 		border-bottom: 1px solid #389965;
+        color: black;
 	}
 
-	header nav li:first-child a{
-		border-top: 1px solid #389965;
-	}
-
-	header .social{
-		display: none;
-	}
-
-	header .social li{
-		margin-left: 10px;
-	}
 }

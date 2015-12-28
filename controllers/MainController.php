@@ -11,6 +11,7 @@ class MainController {
     public static function dispatch($path) {
 
         $p = array_shift($path);
+       // echo "obsah p: " . $p . "<br />";
 
         switch ($p) {
             case "":
@@ -21,8 +22,12 @@ class MainController {
                 self::errorPage();
             break;
 
+            case "moznostiVyziti":
+                self::moznostiVyziti();
+            break;
+
             default:
-                echo "Tato stránka neexituje";
+                self::errorPage();
         }
     }
 
@@ -36,6 +41,16 @@ class MainController {
         exit;
         
     }
+
+    public static function moznostiVyziti() {
+
+        $smarty = Utils::smartyInit();
+
+        $smarty->assign('style', 'moznostiVyziti_style');
+        $smarty->display('moznostiVyziti.html');
+        exit;
+    }
+
 
     public static function errorPage() {
 

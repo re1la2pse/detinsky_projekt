@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="media/css/owl.carousel.css"/>
     <link rel="stylesheet" type="text/css" href="media/css/animate.css"/>
     <link rel="stylesheet" type="text/css" href="media/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="media/css/{if isset($style)}{$style}{/if}.css"/>
 
 
     <script type="text/javascript" src="media/js/jquery.js"></script>
@@ -33,7 +34,7 @@
 <body>
 
     <!--  Header Section  -->
-    <header>
+    <header  id="menu">
         <div class="container">
             <div class="logo pull-left animated wow fadeInLeft">
                 <!--<img src="media/img/logo.png" alt="" title="">-->
@@ -41,24 +42,24 @@
             </div>
 
 
-            <nav class="pull-left">
+            <div id="navigace" class="pull-left">
                 <ul class="list-unstyled">
-                    <li class="animated wow fadeInLeft" data-wow-delay="0s"><a href="#about">O nás</a></li>
-                    <li class="animated wow fadeInLeft" data-wow-delay=".2s"><a href="#">Naše vína</a></li>
-                    <li class="animated wow fadeInLeft" data-wow-delay=".1s"><a href="#">Ubytování</a></li>
+                    <li class="animated wow fadeInLeft" data-wow-delay="0s"><a href="{$ROOT}/">O nás</a></li>
+                    <li class="animated wow fadeInLeft" data-wow-delay=".2s"><a href="{$ROOT}/moznostiVyziti">Možnosti vyžití</a></li>
+                    <li class="animated wow fadeInLeft" data-wow-delay=".1s"><a href="{$ROOT}/ubytovani">Ubytování</a></li>
                     <li class="animated wow fadeInLeft" data-wow-delay=".2s"><a href="#">Kontakt</a></li>
                 </ul>
-            </nav>
+            </div>
 
-            <div class="social pull-right">
+            <!--<div class="social pull-right">
                 <ul class="list-unstyled">
                     <li class="animated wow fadeInRight" data-wow-delay=".2s"><a href="#"><img src="media/img/facebook.png" alt="" title=""></a></li>
                     <li class="animated wow fadeInRight" data-wow-delay=".1s"><a href="#"><img src="media/img/twitter.png" alt="" title=""></a></li>
                     <li class="animated wow fadeInRight" data-wow-delay="0s"><a href="#"><img src="media/img/google.png" alt="" title=""></a></li>
                 </ul>
-            </div>
+            </div>-->
 
-            <span class="burger_icon">menu</span>
+            <!--<span class="burger_icon">menu</span>-->
         </div>
     </header>
     <!--  End Header Section  -->
