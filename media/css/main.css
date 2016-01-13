@@ -39,22 +39,29 @@
 
 }
 
-
-
-
-
-
-
-
-
 /*		General CSS		*/
 body, html {
-    /*background: #faf9f9;*/
-    background: white;
+    background: #faf9f9;
+    /*background: white;*/
     padding: 0px;
     margin: 0px;
     height: 100%;
     width: 100%;
+}
+
+h1 {
+    color: #525151;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 34px;
+    font-weight: bold;
+    font-weight: 700;
+}
+
+h2 {
+    color: #525151;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 28px;
+    font-weight: 700;
 }
 
 a:focus{
@@ -65,14 +72,6 @@ a:focus{
 .container{
 	max-width: 1130px;
 }
-
-
-
-
-
-
-
-
 
 
 /*		Header 		*/
@@ -195,11 +194,6 @@ header #navigace li a:focus{
 /* end slider */
 
 
-
-
-
-
-
 /*   split line	*/
 
 .split_line{
@@ -219,11 +213,6 @@ header #navigace li a:focus{
     line-height: 46px;
     word-break: break-word;
 }
-
-
-
-
-
 
 
 /*		About section 		*/
@@ -274,12 +263,6 @@ header #navigace li a:focus{
     margin-top: 25px;
 }
 
-
-
-
-
-
-
 /*		section contact 		*/
 
 #contact{
@@ -308,26 +291,10 @@ header #navigace li a:focus{
 }
 
 .content {
-    border: 1px solid blue;
-    padding: 50px 10px;
+    padding: 20px 10px;
+    margin-top: 75px;
+    background-color: #faf9f9;
 }
-
-
-
-
-
-/*		Footer 		*/
-
-footer{
-}
-
-
-
-
-
-
-
-
 
 /*		Responsive CSS 		*/
 
