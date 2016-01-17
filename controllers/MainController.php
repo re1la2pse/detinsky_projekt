@@ -25,6 +25,10 @@ class MainController {
             case "moznostiVyziti":
                 self::moznostiVyziti();
             break;
+        
+            case "galerie":
+                self::galerie();
+            break;
 
             default:
                 self::errorPage();
@@ -49,6 +53,16 @@ class MainController {
         $smarty->assign('style', 'moznostiVyziti_style');
         $smarty->display('moznostiVyziti.html');
         exit;
+    }
+    
+    public static function galerie() {
+        
+        $smarty = Utils::smartyInit();
+        
+        $smarty->assign('style', 'galerie_style');
+        $smarty->assign('photos', GalerieModel::getGalerie());
+        $smarty->assign('galerie', true);
+        $smarty->display('galerie.html');
     }
 
 

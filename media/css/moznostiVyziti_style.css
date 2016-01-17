@@ -6,32 +6,18 @@
     line-height: 30px;
 }
 
-p {
-    margin: 0;
-    padding: 0;}
+.top_text {
+    margin-bottom: 20px;
+}
 
-.row {
-    margin-top: 30px;
+.top_foto {
+    /*width: 260px;*/
+    /*height: 100px;*/
     /*border: 1px solid red;*/
 }
-#footer {
-    position: fixed;
-    bottom: 0;
-    font-weight: bold;
-}
 
-.foto_moznosti_vyziti {
-    display: inline-block;
-}
-
-.foto_moznosti_vyziti img{
-    box-shadow: 10px 10px 30px black;
-}
-
-
-
-.rightColumnRow {
- /*border: 1px solid green;*/
+.top_foto img {
+    /*border: 2px solid #41c17d;*/
 }
 
 

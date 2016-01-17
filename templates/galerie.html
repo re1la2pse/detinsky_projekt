@@ -1,0 +1,24 @@
+{include file='inc/header.html'}
+
+    <div class="container content">
+        
+        <div class="row">
+            {foreach from=$photos key=key item=photo}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="img_wrapper">
+                        <a href="{$ROOT}/{$photo['plna']}" rel="lightbox-group" class="imgLink"><img src="{$ROOT}/{$photo['miniatura']}" alt="" class="fotoItem"></a>
+                    </div>
+                </div>
+            {/foreach}
+
+        </div>
+        
+    </div>
+
+    <div class="split_line footer">
+        <div class="container">
+            <h3 class="text-uppercase">Zárybnický sklípek Mutěnice</h3>
+        </div>
+    </div>
+
+{include file='inc/footer.html'}

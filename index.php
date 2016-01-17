@@ -11,9 +11,12 @@ require_once ('models/smarty/smarty/Smarty.class.php');
 mb_internal_encoding("UTF-8");
 
 function autoloaderFnc($class) {
-
+    
+    
     if (preg_match('/Controller$/', $class))
         require("controllers/" . $class . ".php");
+    elseif (preg_match('/Data$/', $class))
+        require("models/data/" . $class . ".php");
     else
         require("models/" . $class . ".php");
 }

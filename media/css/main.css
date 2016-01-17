@@ -49,6 +49,10 @@ body, html {
     width: 100%;
 }
 
+.center {
+    text-align: center;
+}
+
 h1 {
     color: #525151;
     font-family: Helvetica, Arial, sans-serif;
@@ -225,12 +229,16 @@ header #navigace li a:focus{
     margin: 40px 0;
 }
 
-.about .img_glasses {
+.about .img_sklep {
     position: relative;
     display: inline-block;
     text-align: center;
-    margin-top: 25px;
+    margin-top: 60px;
 }
+
+/*.about .img_sklep img {
+    border: 2px solid #525151;
+}*/
 
 .about .right_column h1 {
     color: #525151;
@@ -296,6 +304,12 @@ header #navigace li a:focus{
     background-color: #faf9f9;
 }
 
+.footer {
+    position: fixed;
+    bottom: 0;
+    font-weight: bold;
+}
+
 /*		Responsive CSS 		*/
 
 @media (max-width: 360px) {
@@ -304,7 +318,7 @@ header #navigace li a:focus{
 
 @media (max-width: 767px) {
 
-	header #navigace li{
+	/*header #navigace li{
 		display: block;
 		width: 100%;
 		margin: 0;
@@ -318,6 +332,6 @@ header #navigace li a:focus{
 		padding: 20px 0;
 		border-bottom: 1px solid #389965;
         color: black;
-	}
+	}*/
 
 }
