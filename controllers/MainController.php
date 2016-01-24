@@ -29,6 +29,10 @@ class MainController {
             case "galerie":
                 self::galerie();
             break;
+        
+            case "ubytovani":
+                self::ubytovani();
+            break;
 
             default:
                 self::errorPage();
@@ -63,6 +67,14 @@ class MainController {
         $smarty->assign('photos', GalerieModel::getGalerie());
         $smarty->assign('galerie', true);
         $smarty->display('galerie.html');
+    }
+    
+    public static function ubytovani() {
+        
+        $smarty = Utils::smartyInit();
+        
+        $smarty->assign('style', 'ubytovani_style');
+        $smarty->display('ubytovani.html');
     }
 
 
