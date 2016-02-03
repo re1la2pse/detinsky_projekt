@@ -34,6 +34,14 @@ class MainController {
                 self::ubytovani();
             break;
 
+            case "rezervace":
+                self::rezervace();
+            break;
+
+            case "kontakt":
+                self::kontakt();
+                break;
+
             default:
                 self::errorPage();
         }
@@ -77,6 +85,21 @@ class MainController {
         $smarty->display('ubytovani.html');
     }
 
+    public static function rezervace() {
+
+        $smarty = Utils::smartyInit();
+
+        $smarty->assign('style', 'rezervace_style');
+        $smarty->display('rezervace.html');
+    }
+
+    public static function kontakt() {
+
+        $smarty = Utils::smartyInit();
+
+        $smarty->assign('style', 'kontakt_style');
+        $smarty->display('kontakt.html');
+    }
 
     public static function errorPage() {
 

@@ -1,0 +1,111 @@
+
+#kontaktBlok .section-heading {
+    color: #fed136;
+}
+
+#kontaktBlok .section-subheading {
+    color: white;
+}
+
+#kontaktBlok .form-group {
+    margin-bottom: 25px;
+}
+
+#kontaktBlok .form-group input,
+#kontaktBlok .form-group textarea {
+    padding: 15px;
+}
+
+#kontaktBlok .form-group input.form-control {
+    height: auto;
+}
+
+#kontaktBlok .form-group textarea.form-control {
+    height: 206px;
+}
+
+#kontaktBlok .form-control:focus {
+    border-color: #fed136;
+    box-shadow: none;
+}
+
+#kontaktBlok::-webkit-input-placeholder {
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    color: #bbb;
+}
+
+#kontaktBlok:-moz-placeholder {
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    color: #bbb;
+}
+
+#kontaktBlok::-moz-placeholder {
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    color: #bbb;
+}
+
+#kontaktBlok:-ms-input-placeholder {
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    color: #bbb;
+}
+
+/**********************/
+/* vlastni css */
+
+#kontaktBlok {
+    /*border: 1px solid blue;*/
+    /*background-color: #222;*/
+    background-color: #41c17d;
+    background-image: url(../img/map-image.png);
+    background-position: center;
+    background-repeat: no-repeat;
+
+    padding: 50px 0 50px 0;
+    border-radius: 10px;
+}
+
+#kontaktBlok h1 {
+    color: white;
+    margin: 0;
+}
+
+#kontaktBlok h4 {
+    color: white;
+    margin: 10px 0;
+}
+
+#kontaktColumn h3 {
+    margin: 5px 0;
+}
+
+#kontaktColumn ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+/*.map {
+    width: 825px;
+    height: 252px;
+    border: 3px solid blue;
+    border-radius: 15px;
+    overflow: hidden;
+*/
+
+#googleMap {
+    border: 3px solid #41c17d;
+    border-radius: 5px;
+
+    position: relative;
+    top: 25px;
+    left: 35px;
+    /*overflow: hidden;*/
+}
