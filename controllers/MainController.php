@@ -87,7 +87,11 @@ class MainController {
 
     public static function rezervace() {
 
+        error_reporting(E_ALL ^ E_NOTICE);//všechna chybová hlášení kromě notice
         $smarty = Utils::smartyInit();
+        
+        $kalendar = new KalendarUbytovani();
+        $smarty->assign('kalendar', $kalendar->zobraz());
 
         $smarty->assign('style', 'rezervace_style');
         $smarty->display('rezervace.html');
