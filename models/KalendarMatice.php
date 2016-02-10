@@ -4,9 +4,11 @@
  */
 class KalendarMatice {
     private $matice;
+    private $obsazeno;
     
-    public function __construct($matice) {
+    public function __construct($matice, $obsazeno) {
         $this->matice = $matice;//vložení tabulky do proměnné $matice
+        $this->obsazeno = $obsazeno;
     }
     
    /*
@@ -25,11 +27,11 @@ class KalendarMatice {
             
             foreach ($radek as $sloupec)
             {
-                if ($sloupec == 10 || $sloupec == 11) 
-			$vypis.= "\t<td class=\"obsazeno\">" . $sloupec . "</td>\n\t";
-		else
-			$vypis.= "\t<td>" . $sloupec . "</td>\n\t";
-            }
+                if (in_array($sloupec, $this->obsazeno))
+                    $vypis.= "\t<td class=\"obsazeno\">" . $sloupec . "</td>\n\t";
+                else
+                    $vypis.= "\t<td>" . $sloupec . "</td>\n\t";
+                    }
             
             $vypis.= "</tr>\n";
         }

@@ -100,9 +100,16 @@ class KalendarUbytovani {
         $tabulka[count($tabulka)-1] = array_merge_recursive(
                 $tabulka[count($tabulka)-1], 
                 $this->nadchazejiciMesic(7-count($tabulka[count($tabulka)-1])));
-        
+
+        //asi někde tady bych měl z databáze vytahnout ciselne pole, ktere by obsahovalo
+        //cisla dnu, ktere jsou obsazeny
+
+        $obsazeno = array(1,2,3,7,8,9,25,26,29);
+
+
+
         //vytvoření matice kvuli vypisu
-        $matice = new KalendarMatice($tabulka);
+        $matice = new KalendarMatice($tabulka, $obsazeno);
         $matice = $matice->doHtmlTabulky(FALSE);//vložení do proměnné hotový výstup těla tabulky
         $odkazy = $this->odkazy();//uložení hodnot odkazů
         $nadpis = $this->mesicCesky().' '.$this->datum->format('Y');//vytvoření nadpisu - měsíc a rok
