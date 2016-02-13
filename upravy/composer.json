@@ -20,9 +20,10 @@
 		"nette/utils": "~2.3.0",
 		"latte/latte": "~2.3.0",
 		"tracy/tracy": "~2.3.0",
-		"ezyang/htmlpurifier": "^4.7"
+		"ezyang/htmlpurifier": "^4.7",
+		"nextras/forms": "^1.5"
 	},
 	"require-dev": {
-		"nette/tester": "~1.4",
+		"nette/tester": "~1.4"
 	}
 }

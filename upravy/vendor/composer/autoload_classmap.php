@@ -334,6 +334,7 @@ return array(
     'Tester\\Runner\\PhpInterpreter' => $vendorDir . '/nette/tester/src/Runner/PhpInterpreter.php',
     'Tester\\Runner\\Runner' => $vendorDir . '/nette/tester/src/Runner/Runner.php',
     'Tester\\Runner\\TestHandler' => $vendorDir . '/nette/tester/src/Runner/TestHandler.php',
+    'Tester\\Runner\\ZendPhpDbgInterpreter' => $vendorDir . '/nette/tester/src/Runner/ZendPhpDbgInterpreter.php',
     'Tester\\Runner\\ZendPhpInterpreter' => $vendorDir . '/nette/tester/src/Runner/ZendPhpInterpreter.php',
     'Tester\\TestCase' => $vendorDir . '/nette/tester/src/Framework/TestCase.php',
     'Tester\\TestCaseException' => $vendorDir . '/nette/tester/src/Framework/TestCase.php',

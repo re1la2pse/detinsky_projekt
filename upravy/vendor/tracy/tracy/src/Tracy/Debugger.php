@@ -16,7 +16,7 @@ use ErrorException;
  */
 class Debugger
 {
-	const VERSION = '2.3.6';
+	const VERSION = '2.3.8';
 
 	/** server modes {@link Debugger::enable()} */
 	const
@@ -32,11 +32,14 @@ class Debugger
 	/** @var bool in production mode is suppressed any debugging output */
 	public static $productionMode = self::DETECT;
 
+	/** @var bool whether to display debug bar in development mode */
+	public static $showBar = TRUE;
+
 	/** @var bool {@link Debugger::enable()} */
 	private static $enabled = FALSE;
 
-	/** @var bool prevent double rendering */
-	private static $done;
+	/** @var string reserved memory; also prevents double rendering */
+	private static $reserved;
 
 	/********************* errors and exceptions reporting ****************d*g**/
 
@@ -130,6 +133,7 @@ class Debugger
 	 */
 	public static function enable($mode = NULL, $logDirectory = NULL, $email = NULL)
 	{
+		self::$reserved = str_repeat('t', 3e5);
 		self::$time = isset($_SERVER['REQUEST_TIME_FLOAT']) ? $_SERVER['REQUEST_TIME_FLOAT'] : microtime(TRUE);
 		error_reporting(E_ALL | E_STRICT);
 
@@ -145,7 +149,7 @@ class Debugger
 			self::$logDirectory = $logDirectory;
 		}
 		if (self::$logDirectory) {
-			if (!is_dir(self::$logDirectory) || !preg_match('#([a-z]:)?[/\\\\]#Ai', self::$logDirectory)) {
+			if (!is_dir(self::$logDirectory) || !preg_match('#([a-z]+:)?[/\\\\]#Ai', self::$logDirectory)) {
 				self::$logDirectory = NULL;
 				self::exceptionHandler(new \RuntimeException('Logging directory not found or is not absolute path.'));
 			}
@@ -192,7 +196,7 @@ class Debugger
 	 */
 	public static function shutdownHandler()
 	{
-		if (self::$done) {
+		if (!self::$reserved) {
 			return;
 		}
 
@@ -203,7 +207,7 @@ class Debugger
 				FALSE
 			);
 
-		} elseif (!connection_aborted() && !self::$productionMode && self::isHtmlMode()) {
+		} elseif (self::$showBar && !connection_aborted() && !self::$productionMode && self::isHtmlMode()) {
 			self::getBar()->render();
 		}
 	}
@@ -217,10 +221,10 @@ class Debugger
 	 */
 	public static function exceptionHandler($exception, $exit = TRUE)
 	{
-		if (self::$done) {
+		if (!self::$reserved) {
 			return;
 		}
-		self::$done = TRUE;
+		self::$reserved = NULL;
 
 		if (!headers_sent()) {
 			$protocol = isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1';
@@ -236,6 +240,7 @@ class Debugger
 		if (self::$productionMode) {
 			try {
 				self::log($exception, self::EXCEPTION);
+			} catch (\Throwable $e) {
 			} catch (\Exception $e) {
 			}
 
@@ -249,37 +254,49 @@ class Debugger
 
 		} elseif (!connection_aborted() && self::isHtmlMode()) {
 			self::getBlueScreen()->render($exception);
-			self::getBar()->render();
+			if (self::$showBar) {
+				self::getBar()->render();
+			}
 
 		} else {
 			self::fireLog($exception);
+			$s = get_class($exception) . ($exception->getMessage() === '' ? '' : ': ' . $exception->getMessage())
+				. ' in ' . $exception->getFile() . ':' . $exception->getLine()
+				. "\nStack trace:\n" . $exception->getTraceAsString();
 			try {
 				$file = self::log($exception, self::EXCEPTION);
 				if ($file && !headers_sent()) {
 					header("X-Tracy-Error-Log: $file");
 				}
-				echo "$exception\n" . ($file ? "(stored in $file)\n" : '');
+				echo "$s\n" . ($file ? "(stored in $file)\n" : '');
 				if ($file && self::$browser) {
 					exec(self::$browser . ' ' . escapeshellarg($file));
 				}
+			} catch (\Throwable $e) {
+				echo "$s\nUnable to log error: {$e->getMessage()}\n";
 			} catch (\Exception $e) {
-				echo "$exception\nUnable to log error: {$e->getMessage()}\n";
+				echo "$s\nUnable to log error: {$e->getMessage()}\n";
 			}
 		}
 
 		try {
+			$e = NULL;
 			foreach (self::$onFatalError as $handler) {
 				call_user_func($handler, $exception);
 			}
+		} catch (\Throwable $e) {
 		} catch (\Exception $e) {
+		}
+		if ($e) {
 			try {
 				self::log($e, self::EXCEPTION);
+			} catch (\Throwable $e) {
 			} catch (\Exception $e) {
 			}
 		}
 
 		if ($exit) {
-			exit(254);
+			exit($exception instanceof \Error ? 255 : 254);
 		}
 	}
 
@@ -298,7 +315,7 @@ class Debugger
 
 		if ($severity === E_RECOVERABLE_ERROR || $severity === E_USER_ERROR) {
 			if (Helpers::findTrace(debug_backtrace(PHP_VERSION_ID >= 50306 ? DEBUG_BACKTRACE_IGNORE_ARGS : FALSE), '*::__toString')) {
-				$previous = isset($context['e']) && $context['e'] instanceof \Exception ? $context['e'] : NULL;
+				$previous = isset($context['e']) && ($context['e'] instanceof \Exception || $context['e'] instanceof \Throwable) ? $context['e'] : NULL;
 				$e = new ErrorException($message, 0, $severity, $file, $line, $previous);
 				$e->context = $context;
 				self::exceptionHandler($e);
@@ -316,6 +333,7 @@ class Debugger
 			$e->context = $context;
 			try {
 				self::log($e, self::ERROR);
+			} catch (\Throwable $e) {
 			} catch (\Exception $foo) {
 			}
 			return NULL;
@@ -326,6 +344,10 @@ class Debugger
 			$e = new ErrorException($message, 0, $severity, $file, $line);
 			$e->context = $context;
 			$e->skippable = TRUE;
+			do {
+				$level = ob_get_level();
+				@ob_end_clean(); // @ may not exist or is not removable
+			} while ($level !== ob_get_level());
 			self::exceptionHandler($e);
 		}
 
@@ -338,6 +360,7 @@ class Debugger
 		} elseif (self::$productionMode) {
 			try {
 				self::log("$message in $file:$line", self::ERROR);
+			} catch (\Throwable $e) {
 			} catch (\Exception $foo) {
 			}
 			return NULL;

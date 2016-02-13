@@ -47,10 +47,10 @@ class Dumper
 
 		} elseif (is_float($var)) {
 			if (!is_finite($var)) {
-				return var_export($var, TRUE);
+				return str_replace('.0', '', var_export($var, TRUE)); // workaround for PHP 7.0.2
 			}
 			$var = str_replace(',', '.', "$var");
-			return strpos($var, '.') === FALSE ? $var . '.0' : $var;
+			return strpos($var, '.') === FALSE ? $var . '.0' : $var; // workaround for PHP < 7.0.2
 
 		} elseif (is_string($var)) {
 			if (preg_match('#^(.{' . self::$maxLength . '}).#su', $var, $m)) {
@@ -70,7 +70,7 @@ class Dumper
 					break;
 				}
 				$out .= ($k === $counter ? '' : self::toLine($k) . ' => ')
-					. (is_array($v) ? 'array(...)' : self::toLine($v));
+					. (is_array($v) && $v ? 'array(...)' : self::toLine($v));
 				$counter = is_int($k) ? max($k + 1, $counter) : $counter;
 			}
 			return "array($out)";
@@ -102,7 +102,7 @@ class Dumper
 			$line .= '(' . $object->format('Y-m-d H:i:s O') . ')';
 		}
 
-		return $line . '(#' . substr(md5(spl_object_hash($object)), 0, 4) . ')';
+		return $line . '(' . self::hash($object) . ')';
 	}
 
 
@@ -114,6 +114,17 @@ class Dumper
 	public static function toPhp($var)
 	{
 		return self::_toPhp($var);
+	}
+
+
+	/**
+	 * Returns object's stripped hash.
+	 * @param  object
+	 * @return string
+	 */
+	private static function hash($object)
+	{
+		return '#' . substr(md5(spl_object_hash($object)), 0, 4);
 	}
 
 
@@ -216,9 +227,10 @@ class Dumper
 				}
 				$out .= $space;
 			}
+			$hash = self::hash($var);
 			return $class === 'stdClass'
-				? "(object) array($out)"
-				: "$class::__set_state(array($out))";
+				? "(object) /* $hash */ array($out)"
+				: "$class::__set_state(/* $hash */ array($out))";
 
 		} elseif (is_resource($var)) {
 			return '/* resource ' . get_resource_type($var) . ' */';
@@ -309,8 +321,10 @@ class Dumper
 					)
 					: '[internal function]'
 				)
-				. $item['class'] . $item['type']
-				. (isset($item['function']) ? $item['function'] . '()' : '')
+				. ($item['class'] === 'Tester\Assert' && ($tmp = file($item['file'])) && strpos($tmp[$item['line'] - 1], "::$item[function](")
+					? trim($tmp[$item['line'] - 1])
+					: $item['class'] . $item['type'] . $item['function'] . ($item['function'] ? '()' : '')
+				)
 				. self::color() . "\n";
 		}
 

@@ -13,7 +13,7 @@ namespace Latte;
  */
 class Engine extends Object
 {
-	const VERSION = '2.3.7';
+	const VERSION = '2.3.9';
 
 	/** Content types */
 	const CONTENT_HTML = 'html',
@@ -108,6 +108,9 @@ class Engine extends Object
 		ob_start();
 		try {
 			$this->render($name, $params);
+		} catch (\Throwable $e) {
+			ob_end_clean();
+			throw $e;
 		} catch (\Exception $e) {
 			ob_end_clean();
 			throw $e;
@@ -216,11 +219,11 @@ class Engine extends Object
 			if (@eval('?>' . $code) === FALSE) { // @ is escalated to exception
 				$error = error_get_last();
 				$e = new CompileException('Error in template: ' . $error['message']);
-				throw $e->setSource(NULL, NULL, $name);
+				throw $e->setSource($code, $error['line'], $name . ' (compiled)');
 			}
 		} catch (\ParseError $e) {
 			$e = new CompileException('Error in template: ' . $e->getMessage(), 0, $e);
-			throw $e->setSource(NULL, NULL, $name);
+			throw $e->setSource($code, $e->getLine(), $name . ' (compiled)');
 		}
 		return $code;
 	}
