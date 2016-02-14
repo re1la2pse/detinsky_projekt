@@ -25,7 +25,18 @@ class RezervaceForm extends BaseBT3Form {
 		->setRequired('Prosím vložte datum konce ubytování.');
 
 	$form->addSubmit('send', 'Potvrdit');
+        
+        $form->onValidate[] = array($this, 'validateForm');
 
 	return $form;
     }
+    
+    public function validateForm($form) {
+        
+        $values = $form->getValues();
+        
+        if ($values['fromDate'] > $values['toDate']){
+            $form->addError('Datum konce nemůže být před datem začátku.');    
+        }        
+    }  
 }

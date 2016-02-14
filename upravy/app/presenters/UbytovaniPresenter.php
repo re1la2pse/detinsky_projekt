@@ -6,9 +6,16 @@ use Nette;
 use Forms;
 use Tracy\Debugger;
 use Tracy;
+use App\Model\RezervaceModel;
 
 class UbytovaniPresenter extends BasePresenter
 {
+    /**
+     * @inject
+     * @var RezervaceModel
+     */
+    public $rezervaceModel;
+    
 
     protected function createComponentRezervaceForm() {
         
