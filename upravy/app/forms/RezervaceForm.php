@@ -15,7 +15,7 @@ class RezervaceForm extends BaseBT3Form {
         
         $form = $this->getBootstrapForm();
 
-	$form->addText('Name', 'Název:')
+	$form->addText('name', 'Název:')
             ->setRequired('Prosím vložte název.');
 
 	$form->addDatePicker('fromDate', 'Od:')

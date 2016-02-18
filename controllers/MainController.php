@@ -93,6 +93,8 @@ class MainController {
         $kalendar = new KalendarUbytovani();
         $smarty->assign('kalendar', $kalendar->zobraz());
 
+        $smarty->assign('pom', RezervaceModel::getBusyDay(2, 2016));
+
         $smarty->assign('style', 'rezervace_style');
         $smarty->display('rezervace.html');
     }

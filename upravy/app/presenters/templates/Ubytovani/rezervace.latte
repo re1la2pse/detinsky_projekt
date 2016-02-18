@@ -3,8 +3,36 @@
 
 <div class="container content">
 
-    <h2>Rezervace ubytování</h2>
-    
-    {control rezervaceForm}
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>Rezervace ubytování</h2>
+
+            {control rezervaceForm}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+             <h2>Seznam aktuálních rezervací</h2>
+
+             <table class="table table-striped">
+                <tr>
+                    <th>Název rezervace</th>
+                    <th>Od</th>
+                    <th>Do</th>
+                </tr>
+                {foreach $rezervace as $r}
+                    <tr>
+                        <td>{$r['nazev']}</td>
+                        <td>{$r['odDatum']->format('d-m-Y')}</td>
+                        <td>{$r['doDatum']->format('d-m-Y')}</td>
+                        <td><a n:href="Ubytovani:deleteRezervace, 'id' => $r['id']">smazat</a></td>
+                    </tr>
+                {/foreach}
+             </table>
+        </div>
+    </div>
+
+
 
 </div>
