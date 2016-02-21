@@ -21,7 +21,10 @@ class RezervaceModel extends Nette\Object
         $this->db->table('rezervace')->insert(array(
             'nazev' => $values['name'],
             'odDatum' => $values['fromDate']->format('Y-m-d'),
-            'doDatum' => $values['toDate']->format('Y-m-d')
+            'doDatum' => $values['toDate']->format('Y-m-d'),
+            'email' => $values['email'],
+            'telefon' => $values['phone'],
+            'pocet_osob' => $values['numberOfPersons']
         ));
     }
 
@@ -29,9 +32,14 @@ class RezervaceModel extends Nette\Object
 
         $currentDate = new Nette\Utils\DateTime();
 
-        $rezervace = $this->db->table('rezervace')->where('doDatum >= ?', $currentDate->format('Y-m-d'))->order('doDatum');
+        $rezervace = $this->db->table('rezervace')->where('doDatum >= ?', $currentDate->format('Y-m-d'))->order('odDatum');
 
         return $rezervace;
+    }
+    
+    public function deleteRezervace($id) {
+        
+        $this->db->table('rezervace')->where('id', $id)->delete();
     }
 
 }

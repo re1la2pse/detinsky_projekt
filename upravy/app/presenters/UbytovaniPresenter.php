@@ -27,16 +27,19 @@ class UbytovaniPresenter extends BasePresenter
     public function rezervaceFormSuccess(Nette\Forms\Form $form) {
         $values = $form->getValues();
 
-        Debugger::dump($values['fromDate']->format('Y-m-d'));
+        //Debugger::dump($values['fromDate']->format('Y-m-d'));
 
         $this->rezervaceModel->newRezervace($values);
+        
+        $this->flashMessage("Rezervace vložena");
+        $this->redirect('Ubytovani:prehledRezervace');
     }
 
     public function renderRezervace() {
 
-        $rezervace = $this->rezervaceModel->getAktualRezervace();
+        //$rezervace = $this->rezervaceModel->getAktualRezervace();
 
-        $this->template->rezervace = $rezervace;
+        //$this->template->rezervace = $rezervace;
 
         /*foreach($rezervace as $r) {
             Debugger::dump($r['nazev']);
@@ -49,8 +52,18 @@ class UbytovaniPresenter extends BasePresenter
         //Debugger::dump($id);
        // Debugger::fireLog($id); // vypíšeme řetězec do konzoly Firebugu
 
+        $this->rezervaceModel->deleteRezervace($id);
+       
         $this->flashMessage("Rezervace vymazána");
-        $this->redirect('Ubytovani:rezervace');
+        $this->redirect('Ubytovani:prehledRezervace');
+    }
+    
+    public function renderPrehledRezervace() {
+        
+        $rezervace = $this->rezervaceModel->getAktualRezervace();
+
+        $this->template->rezervace = $rezervace;
+        $this->template->currentDate = new Nette\Utils\DateTime();
     }
 
 }

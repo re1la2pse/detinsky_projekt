@@ -100,13 +100,8 @@ class KalendarUbytovani {
         $tabulka[count($tabulka)-1] = array_merge_recursive(
                 $tabulka[count($tabulka)-1], 
                 $this->nadchazejiciMesic(7-count($tabulka[count($tabulka)-1])));
-
-        //asi někde tady bych měl z databáze vytahnout ciselne pole, ktere by obsahovalo
-        //cisla dnu, ktere jsou obsazeny
-
-        $obsazeno = array(1,2,3,7,8,9,25,26,29);
-
-
+        //zjistim obsazenost 
+        $obsazeno = RezervaceModel::getBusyDay($this->datum->format('n'), $this->datum->format('Y'));
 
         //vytvoření matice kvuli vypisu
         $matice = new KalendarMatice($tabulka, $obsazeno);

@@ -9,6 +9,7 @@ class RezervaceModel {
      */
     public static function getBusyDay($month, $year) {
 
+        //pripravim si dotaz do databaze
         if($month == 12) {
             $nextMonth = "01";
             $yearD1 = $year + 1;
@@ -18,14 +19,11 @@ class RezervaceModel {
         }
 
         $d1 = $yearD1 . "-" . $nextMonth . "-01";
-
         $d2 = $year . "-" . (($month < 10) ? ("0") : "") . $month . "-01";
-
-        echo "###" . $d1 . "###";
-        echo "###" . $d2 . "###";
-
+        
         $pdo = Db_Data::getPDO();
 
+        //vyberu jen ty zaznamy, ktere se tykaji daneho mesice
         $sql = "SELECT * from rezervace WHERE odDatum <:d1 AND doDatum >= :d2";
 
         $q = $pdo->prepare($sql);
@@ -33,22 +31,59 @@ class RezervaceModel {
 
         $rezervace =  $q->fetchAll(); //rezervace pro dany mesic
 
-        print_r($rezervace);
+        //print_r($rezervace);
+        
+        //hraniční datumy daneho měsíce
+        $firstDay = date($year . "-" . (($month < 10) ? ("0") : "") . $month . "-01");
+        $lastDay = date($year . "-" . (($month < 10) ? ("0") : "") . $month . "-" . self::getNumberOfDays($month));
 
+        //sestavim pole obsazených dnu
         $busyDays = array();
         foreach ($rezervace as $r) {
 
             $fromDate = date($r['odDatum']);
             $toDate = date($r['doDatum']);
+            
+            $begin = (int)explode('-', $fromDate)[2]; //zacatek rezervace (cislo dne)
+            $end = (int)explode('-', $toDate)[2]; // konec rezervace
 
-            echo "od " . $fromDate . " do " . $toDate . "<br />";
-
-            if ($monthFrom == $month && $monthTo == $month) { //zacatek i konec v jednom mesici
-
-
+            //1. - uvnitr daneho mesice
+            if (($fromDate >= $firstDay && $fromDate <= $lastDay) && ($toDate <= $lastDay && $toDate >= $firstDay)) {
+                
+                for ($i=$begin; $i<=$end; $i++) {
+                    $busyDays[$i] = $i;
+                }
+            } else
+            
+            //2. - cast mesice ze zacatku (zacatek mimo)
+            if ($fromDate < $firstDay && ($toDate >= $firstDay && $toDate <= $lastDay)) {
+              
+                for ($i=1; $i<=$end; $i++) {
+                    $busyDays[$i] = $i;
+                }
+                
+            } else
+            
+            //3. - cast mesice - konec (konec mimo)
+            if (($fromDate >= $firstDay && $fromDate <= $lastDay) && $toDate > $lastDay) {
+                
+                for ($i=$begin; $i<=self::getNumberOfDays($month); $i++) {
+                    $busyDays[$i] = $i;
+                }
+                
+            } else
+            
+            //4. cely mesic (zacatek a konec mimo)
+            if ($fromDate < $firstDay && $toDate > $lastDay) {
+                
+                for ($i=1; $i<=self::getNumberOfDays($month); $i++) {
+                    $busyDays[$i] = $i;
+                }
             }
         }
-
+        
+         //print_r($busyDays);
+         return $busyDays;
     }
 
     /**

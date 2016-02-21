@@ -26,3 +26,18 @@ html, body {
     padding: 5px;
     text-align: center;
 }
+
+/* seznam aktualnich rezervaci */
+table td.datum {
+    color: red;
+    font-weight: bold;
+}
+
+table tr.inProgress {
+    background-color: #b3ffb3;
+    /*font-weight: bold;*/
+}
+
+table tr.inProgress td.datum {
+    color: green;
+}

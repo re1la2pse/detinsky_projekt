@@ -7,9 +7,9 @@
     color: white;
 }
 
-#kontaktBlok .form-group {
+/*#kontaktBlok .form-group {
     margin-bottom: 25px;
-}
+}*/
 
 #kontaktBlok .form-group input,
 #kontaktBlok .form-group textarea {
@@ -21,7 +21,7 @@
 }
 
 #kontaktBlok .form-group textarea.form-control {
-    height: 206px;
+    height: 186px;
 }
 
 #kontaktBlok .form-control:focus {
@@ -68,7 +68,7 @@
     background-position: center;
     background-repeat: no-repeat;
 
-    padding: 50px 0 50px 0;
+    padding: 50px 20px 50px 20px;
     border-radius: 10px;
 }
 
@@ -108,4 +108,13 @@
     top: 25px;
     left: 35px;
     /*overflow: hidden;*/
+}
+
+@media (max-width: 767px) {
+    
+    #googleMap {
+        position: relative;
+        left: 0;
+    }
+    
 }
