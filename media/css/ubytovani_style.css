@@ -9,4 +9,7 @@
 
 .foto {
     margin: 13px 0;
+   /* border: 1px solid red;*/
+    width: 255px;
+    height: 170px;
 }

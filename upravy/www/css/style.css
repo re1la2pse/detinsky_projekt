@@ -34,7 +34,7 @@ table td.datum {
 }
 
 table tr.inProgress {
-    background-color: #b3ffb3;
+    background-color: #b3ffb3 !important;
     /*font-weight: bold;*/
 }
 

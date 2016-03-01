@@ -24,6 +24,7 @@ class UploadPictureForm extends BaseBT3Form
 
         $form->addMultiUpload('pictures', 'Vyber fotky: ')
             ->addRule($form::IMAGE, 'Fotky musí být ve formátu JPEG, PNG nebo GIF.')
+            ->addRule(Form::MAX_FILE_SIZE, 'Soubor je příliš velký! Povolená velikost je 2M.', 3 * 1024 * 1024)
             ->setRequired('Vyberte prosím fotky.');
 
         $form->addSubmit('send', 'Nahrát');
