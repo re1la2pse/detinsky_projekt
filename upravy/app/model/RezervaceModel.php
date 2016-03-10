@@ -7,6 +7,9 @@ use Tracy\Debugger;
 
 class RezervaceModel extends Nette\Object
 {
+    const MALY_POKOJ = 1;
+    const APARTMAN = 2;
+
     private $db;
 
     public function __construct(Nette\Database\Context $database)
@@ -14,6 +17,10 @@ class RezervaceModel extends Nette\Object
         $this->db = $database;
     }
 
+    /**
+     * Zalozi novou rezervaci
+     * @param $values
+     */
     public function newRezervace($values) {
 
         //rezervace se muzou prekryvat, vice ubytovanych ve stejny cas
@@ -24,22 +31,54 @@ class RezervaceModel extends Nette\Object
             'doDatum' => $values['toDate']->format('Y-m-d'),
             'email' => $values['email'],
             'telefon' => $values['phone'],
-            'pocet_osob' => $values['numberOfPersons']
+            'pocet_osob' => $values['numberOfPersons'],
+            'typPokoje' => $values['room']
         ));
     }
 
-    public function getAktualRezervace() {
+    /**
+     * Vrati aktualne probihajici rezervace pro maly pokoj (1)
+     * @return Nette\Database\Table\Selection
+     */
+    public function getAktualRezervaceMalyPokoj() {
 
         $currentDate = new Nette\Utils\DateTime();
 
-        $rezervace = $this->db->table('rezervace')->where('doDatum >= ?', $currentDate->format('Y-m-d'))->order('odDatum');
+        $rezervace = $this->db->table('rezervace')->where('doDatum >= ? AND typPokoje = ?', $currentDate->format('Y-m-d'), self::MALY_POKOJ)->order('odDatum');
 
         return $rezervace;
     }
-    
+
+    /**
+     * Vrati aktualne probihajici rezervace pro apartman (2)
+     * @return Nette\Database\Table\Selection
+     */
+    public function getAktualRezervaceApartman() {
+
+        $currentDate = new Nette\Utils\DateTime();
+
+        $rezervace = $this->db->table('rezervace')->where('doDatum >= ? AND typPokoje = ?', $currentDate->format('Y-m-d'), self::APARTMAN)->order('odDatum');
+
+        return $rezervace;
+    }
+
+    /**
+     * Smaze rezervaci na zaklade id
+     * @param $id
+     */
     public function deleteRezervace($id) {
         
         $this->db->table('rezervace')->where('id', $id)->delete();
+    }
+
+    /**
+     * Updatuje u rezervace pole zaloha
+     * @param $zaloha
+     * @param $idRezervace
+     */
+    public function updateZaloha($zaloha, $idRezervace) {
+
+        $this->db->table('rezervace')->where('id', $idRezervace)->update(array('zaloha' => $zaloha));
     }
 
 }

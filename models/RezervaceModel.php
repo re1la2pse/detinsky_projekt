@@ -7,7 +7,7 @@ class RezervaceModel {
      * @param $month - číslo
      * @param $year - rok ve tvaru YYYY
      */
-    public static function getBusyDay($month, $year) {
+    public static function getBusyDay($month, $year, $typPokoje) {
 
         //pripravim si dotaz do databaze
         if($month == 12) {
@@ -24,7 +24,8 @@ class RezervaceModel {
         $pdo = Db_Data::getPDO();
 
         //vyberu jen ty zaznamy, ktere se tykaji daneho mesice
-        $sql = "SELECT * from rezervace WHERE odDatum <:d1 AND doDatum >= :d2";
+        $sql = ($typPokoje == 1) ? "SELECT * from rezervace WHERE odDatum <:d1 AND doDatum >= :d2 AND zaloha = 1 AND typPokoje = 1"
+                                 : "SELECT * from rezervace WHERE odDatum <:d1 AND doDatum >= :d2 AND zaloha = 1 AND typPokoje = 2";
 
         $q = $pdo->prepare($sql);
         $q->execute(array(":d1" => $d1, ":d2" => $d2));

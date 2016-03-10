@@ -6,12 +6,19 @@ class KalendarUbytovani {
      * nebo první den aktuálního měsíce
      */
     private $datum;
+
+    private $typPokoje;
+
+    const MALY_POKOJ = 1;
+    const APARTMAN = 2;
     
-    public function __construct()
+    public function __construct($typPokoje)
     {
      $this->datum = ($_GET['mesic']&&$_GET['rok']) 
              ? DateTime::createFromFormat('j-n-Y', '1-'.$_GET['mesic'].'-'.$_GET['rok']) 
              : DateTime::createFromFormat('j', '1'); //vrazi datum 1-aktualni mesic-aktualni rok
+
+     $this->typPokoje = $typPokoje;
     }
     
     /*
@@ -100,8 +107,10 @@ class KalendarUbytovani {
         $tabulka[count($tabulka)-1] = array_merge_recursive(
                 $tabulka[count($tabulka)-1], 
                 $this->nadchazejiciMesic(7-count($tabulka[count($tabulka)-1])));
-        //zjistim obsazenost 
-        $obsazeno = RezervaceModel::getBusyDay($this->datum->format('n'), $this->datum->format('Y'));
+
+        //zjistim obsazenost
+        $obsazeno = ($this->typPokoje == 1) ? RezervaceModel::getBusyDay($this->datum->format('n'), $this->datum->format('Y'), self::MALY_POKOJ)
+                                      : RezervaceModel::getBusyDay($this->datum->format('n'), $this->datum->format('Y'), self::APARTMAN);
 
         //vytvoření matice kvuli vypisu
         $matice = new KalendarMatice($tabulka, $obsazeno);

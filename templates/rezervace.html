@@ -6,6 +6,20 @@
         <h1>Rezervace ubytování</h1>
     </div>
 
+    <div class="row center">
+        <div class="col-lg-10 col-lg-offset-1">
+           <p>
+               <strong>Využijte náš rezervační formulář pro nezávaznou rezervaci ubytování.</strong>
+           </p>
+           <p>
+               Rezervaci provádějte nejpozději týden před plánovaným příjezdem. Provozovatel ubytování
+               Vás bude, po zpracování rezervace, kontaktovat a potvrdí Vám termín ubytování.
+               Je možné provést rezervaci i na již obsazený termín (viz. kalendář) a v případě, že by se daný
+               termín uvolnil, Vás bude provozovatel kontaktovat.
+           </p>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-sm-5 col-md-5 col-lg-offset-1 col-lg-4">
 
@@ -45,27 +59,30 @@
                     <input type="text" name="datumDo" class="form-control" id="datumDo">
                 </div>
 
+                <div class="form-group">
+                    <label for="pokoj">Typ pokoje:</label>
+                    <select name="typPokoje" class="form-control" id="pokoj">
+                        <option value="1">Pokoj bez kuchyňky pro 2 osoby</option>
+                        <option value="2">Apartmán s kuchyňkou pro 4 osoby</option>
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-default">Odeslat</button>
             </form>
         </div>
 
             <div class="col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-1 col-lg-offset-1 col-lg-5">
 
+                <h4>Kalendář rezervace pro apartmán s kuchyňkou <br /> (4 osoby)</h4>
                 <p>
-                    <strong>Využijte náš rezervační formulář pro nezávaznou rezervaci ubytování.</strong>
-                </p>
-                <p>
-                    Rezervaci provádějte nejpozději týden před plánovaným příjezdem. Provozovatel ubytování
-                    Vás bude, po zpracování rezervace, kontaktovat a potvrdí Vám termín ubytování.
+                    {$kalendarApartman}
                 </p>
 
+                <br />
+                <h4>Kalendář rezervace pro pokoj bez kuchyňky <br /> (2 osoby)</h4>
                 <p>
-                    Je možné provést rezervaci i na již obsazený termín (viz. kalendář) a v případě, že by se daný
-                    termín uvolnil, Vás bude provozovatel kontaktovat.
+                    {$kalendarMalyPokoj}
                 </p>
-                
-                {$kalendar}
-                
             </div>
 
         </div>

@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-             <h2>Seznam aktuálních rezervací</h2>
+             <h2>Seznam aktuálních rezervací pro apartmán</h2>
 
              <table class="table table-striped">
                 <tr>
@@ -14,9 +14,11 @@
                     <th>E-mail</th>
                     <th>Telefon</th>
                     <th>Počet osob</th>
+                    <th>Typ pokoje</th>
+                    <th>Záloha</th>
                     <th></th>
                 </tr>
-                {foreach $rezervace as $r}
+                {foreach $rezervaceApartman as $r}
                     <tr {if $currentDate>=$r['odDatum']} class="inProgress"{/if}>
                         <td>{$r['nazev']}</td>
                         <td class="datum">{$r['odDatum']->format('d.m.Y')}</td>
@@ -24,16 +26,50 @@
                         <td>{$r['email']}</td>
                         <td>{$r['telefon']}</td>
                         <td>{$r['pocet_osob']}</td>
-                        
+                        <td>{if $r['typPokoje'] == 1} Malý pokoj {else} Apartmán {/if}</td>
+                        <td><input type="checkbox" name="checkboxZaloha" id={$r['id']} {if $r['zaloha']==1}checked="checked" {/if} /></td>
                         <td><a n:href="Ubytovani:deleteRezervace, 'id' => $r['id']">smazat</a></td>
                     </tr>
                 {/foreach}
              </table>
-             
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+             <h2>Seznam aktuálních rezervací pro pokoj bez kuchyňky</h2>
+
+             <table class="table table-striped">
+                <tr>
+                    <th>Název rezervace</th>
+                    <th>Od</th>
+                    <th>Do</th>
+                    <th>E-mail</th>
+                    <th>Telefon</th>
+                    <th>Počet osob</th>
+                    <th>Typ pokoje</th>
+                    <th>Záloha</th>
+                    <th></th>
+                </tr>
+                {foreach $rezervaceMalyPokoj as $r}
+                    <tr {if $currentDate>=$r['odDatum']} class="inProgress"{/if}>
+                        <td>{$r['nazev']}</td>
+                        <td class="datum">{$r['odDatum']->format('d.m.Y')}</td>
+                        <td class="datum">{$r['doDatum']->format('d.m.Y')}</td>
+                        <td>{$r['email']}</td>
+                        <td>{$r['telefon']}</td>
+                        <td>{$r['pocet_osob']}</td>
+                        <td>{if $r['typPokoje'] == 1} Malý pokoj {else} Apartmán {/if}</td>
+                        <td><input type="checkbox" name="checkboxZaloha" id={$r['id']} {if $r['zaloha']==1}checked="checked" {/if} /></td>
+                        <td><a n:href="Ubytovani:deleteRezervace, 'id' => $r['id']">smazat</a></td>
+                    </tr>
+                {/foreach}
+             </table>
+
              <p>
                 * Zeleně vyznačené řádky označují právě probíhající rezervace.
              </p>
         </div>
     </div>
 
-</di>
+</div>

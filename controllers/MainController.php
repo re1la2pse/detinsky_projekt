@@ -90,10 +90,13 @@ class MainController {
         error_reporting(E_ALL ^ E_NOTICE);//všechna chybová hlášení kromě notice
         $smarty = Utils::smartyInit();
         
-        $kalendar = new KalendarUbytovani();
-        $smarty->assign('kalendar', $kalendar->zobraz());
+        $kalendarMalyPokoj = new KalendarUbytovani(1);
+        $smarty->assign('kalendarMalyPokoj', $kalendarMalyPokoj->zobraz());
 
-        $smarty->assign('pom', RezervaceModel::getBusyDay(2, 2016));
+        $kalendarApartman = new KalendarUbytovani(2);
+        $smarty->assign('kalendarApartman', $kalendarApartman->zobraz());
+
+        //$smarty->assign('pom', RezervaceModel::getBusyDay(2, 2016));
 
         $smarty->assign('style', 'rezervace_style');
         $smarty->display('rezervace.html');

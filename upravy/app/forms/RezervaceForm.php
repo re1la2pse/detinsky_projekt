@@ -33,6 +33,10 @@ class RezervaceForm extends BaseBT3Form {
 	$form->addText('numberOfPersons', 'Počet osob:');
 	    //->addRule(Form::INTEGER, 'Hodnota počet osob musí být číslo');
 
+    $form->addSelect('room', 'Pokoj:', array('1' => 'Pokoj bez kuchyňky pro 2 osoby',
+                                             '2' => 'Apartman s kuchyňkou pro 4 osoby'))
+        ->setRequired('Prosím vyberte pokoj');
+
 	$form->addSubmit('send', 'Potvrdit');
         
         $form->onValidate[] = array($this, 'validateForm');

@@ -27,8 +27,6 @@ class UbytovaniPresenter extends BasePresenter
     public function rezervaceFormSuccess(Nette\Forms\Form $form) {
         $values = $form->getValues();
 
-        //Debugger::dump($values['fromDate']->format('Y-m-d'));
-
         $this->rezervaceModel->newRezervace($values);
         
         $this->flashMessage("Rezervace vložena");
@@ -36,10 +34,6 @@ class UbytovaniPresenter extends BasePresenter
     }
 
     public function renderRezervace() {
-
-        //$rezervace = $this->rezervaceModel->getAktualRezervace();
-
-        //$this->template->rezervace = $rezervace;
 
         /*foreach($rezervace as $r) {
             Debugger::dump($r['nazev']);
@@ -49,21 +43,32 @@ class UbytovaniPresenter extends BasePresenter
 
     public function actionDeleteRezervace($id) {
 
-        //Debugger::dump($id);
-       // Debugger::fireLog($id); // vypíšeme řetězec do konzoly Firebugu
-
         $this->rezervaceModel->deleteRezervace($id);
        
         $this->flashMessage("Rezervace vymazána");
         $this->redirect('Ubytovani:prehledRezervace');
     }
+
+    /**
+     * Odchyti ajaxovy pozadavek vyvolany checkboxem checkboxZaloha
+     * a updatuje rezervaci v db
+     * @param $zaloha
+     * @param $rezervaceId
+     */
+    public function handleChangeZaloha($zaloha, $rezervaceId) {
+
+        //Debugger::fireLog($zaloha);
+        //Debugger::fireLog( $rezervaceId);
+
+        $this->rezervaceModel->updateZaloha($zaloha, $rezervaceId);
+    }
     
     public function renderPrehledRezervace() {
-        
-        $rezervace = $this->rezervaceModel->getAktualRezervace();
 
-        $this->template->rezervace = $rezervace;
+        $this->template->rezervaceMalyPokoj = $this->rezervaceModel->getAktualRezervaceMalyPokoj();
+        $this->template->rezervaceApartman = $this->rezervaceModel->getAktualRezervaceApartman();
         $this->template->currentDate = new Nette\Utils\DateTime();
+        $this->template->script = "rezervaceScript";
     }
 
 }
