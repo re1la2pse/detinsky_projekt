@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Počítač: localhost
--- Vytvořeno: Ned 21. úno 2016, 14:07
+-- Vytvořeno: Ned 13. bře 2016, 10:16
 -- Verze serveru: 5.6.20
 -- Verze PHP: 5.5.15
 
@@ -23,6 +23,40 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktura tabulky `aktuality`
+--
+
+CREATE TABLE IF NOT EXISTS `aktuality` (
+`id` int(11) NOT NULL,
+  `nazev` varchar(50) COLLATE utf8_czech_ci NOT NULL,
+  `text` text COLLATE utf8_czech_ci NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=6 ;
+
+--
+-- Vypisuji data pro tabulku `aktuality`
+--
+
+INSERT INTO `aktuality` (`id`, `nazev`, `text`) VALUES
+(5, 'Nová aktualita', 'sgsg dfgdf gdrsjkl jkhndsf gklsag msdrgkdsg sdag ');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `fotky`
+--
+
+CREATE TABLE IF NOT EXISTS `fotky` (
+  `id_fotky` int(11) NOT NULL,
+  `miniatura` varchar(80) COLLATE utf8_czech_ci DEFAULT NULL,
+  `plna` varchar(80) COLLATE utf8_czech_ci DEFAULT NULL,
+  `zobrazit` int(11) NOT NULL,
+  `razeni` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabulky `rezervace`
 --
 
@@ -33,24 +67,59 @@ CREATE TABLE IF NOT EXISTS `rezervace` (
   `doDatum` date NOT NULL,
   `email` varchar(50) COLLATE utf8_czech_ci DEFAULT NULL,
   `telefon` text COLLATE utf8_czech_ci,
-  `pocet_osob` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=17 ;
+  `pocet_osob` int(11) DEFAULT NULL,
+  `typPokoje` int(11) NOT NULL,
+  `zaloha` int(11) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=20 ;
 
 --
 -- Vypisuji data pro tabulku `rezervace`
 --
 
-INSERT INTO `rezervace` (`id`, `nazev`, `odDatum`, `doDatum`, `email`, `telefon`, `pocet_osob`) VALUES
-(10, 'r003', '2016-02-27', '2016-02-28', NULL, NULL, NULL),
-(11, 'r0001', '2016-02-15', '2016-03-05', NULL, NULL, NULL),
-(13, 'Celá rodina Nováků i s dětma', '2016-02-25', '2016-03-04', '', '420', 3),
-(14, 'dfhdfsh', '2016-02-26', '2016-03-06', '', NULL, 0),
-(15, 'fhfgjhfghfghdfh', '2016-03-04', '2016-03-06', '', '+420 775 026 785', 0),
-(16, 'asgasdgdjfgjdfhfbh', '2016-03-01', '2016-04-08', 'petr.mokrusa@centrum.cz', '775 026 785', 5);
+INSERT INTO `rezervace` (`id`, `nazev`, `odDatum`, `doDatum`, `email`, `telefon`, `pocet_osob`, `typPokoje`, `zaloha`) VALUES
+(10, 'r003', '2016-02-27', '2016-02-28', NULL, NULL, NULL, 1, 0),
+(11, 'r0001', '2016-02-15', '2016-03-05', NULL, NULL, NULL, 1, 0),
+(13, 'Celá rodina Nováků i s dětma', '2016-02-25', '2016-03-04', '', '420', 3, 1, 0),
+(14, 'dfhdfsh', '2016-02-26', '2016-03-06', '', NULL, 0, 1, 0),
+(15, 'fhfgjhfghfghdfh', '2016-03-04', '2016-03-06', '', '+420 775 026 785', 0, 1, 0),
+(16, 'asgasdgdjfgjdfhfbh', '2016-03-01', '2016-04-08', 'petr.mokrusa@centrum.cz', '775 026 785', 5, 1, 1),
+(17, 'rezervace1', '2016-03-18', '2016-03-26', 'email@email.com', '545874521', 4, 2, 1),
+(19, 'dalsiRezervace', '2016-03-22', '2016-03-24', 'novyEmail@asdasd.com', '', 2, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+`id` int(11) NOT NULL,
+  `login` varchar(255) COLLATE utf8_czech_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_czech_ci NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=3 ;
+
+--
+-- Vypisuji data pro tabulku `user`
+--
+
+INSERT INTO `user` (`id`, `login`, `password`) VALUES
+(2, 'admin', 'admin');
 
 --
 -- Klíče pro exportované tabulky
 --
+
+--
+-- Klíče pro tabulku `aktuality`
+--
+ALTER TABLE `aktuality`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Klíče pro tabulku `fotky`
+--
+ALTER TABLE `fotky`
+ ADD PRIMARY KEY (`id_fotky`);
 
 --
 -- Klíče pro tabulku `rezervace`
@@ -59,14 +128,30 @@ ALTER TABLE `rezervace`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Klíče pro tabulku `user`
+--
+ALTER TABLE `user`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT pro tabulky
 --
 
 --
+-- AUTO_INCREMENT pro tabulku `aktuality`
+--
+ALTER TABLE `aktuality`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT pro tabulku `rezervace`
 --
 ALTER TABLE `rezervace`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT pro tabulku `user`
+--
+ALTER TABLE `user`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

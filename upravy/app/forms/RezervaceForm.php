@@ -33,7 +33,7 @@ class RezervaceForm extends BaseBT3Form {
 	$form->addText('numberOfPersons', 'Počet osob:');
 	    //->addRule(Form::INTEGER, 'Hodnota počet osob musí být číslo');
 
-    $form->addSelect('room', 'Pokoj:', array('1' => 'Pokoj bez kuchyňky pro 2 osoby',
+	$form->addSelect('room', 'Pokoj:', array('1' => 'Pokoj bez kuchyňky pro 2 osoby',
                                              '2' => 'Apartman s kuchyňkou pro 4 osoby'))
         ->setRequired('Prosím vyberte pokoj');
 
@@ -52,10 +52,10 @@ class RezervaceForm extends BaseBT3Form {
             $form->addError('Datum konce nemůže být před datem začátku.');    
         }
 	
-	$currentDate = \date('Y-m-d');
+	/*$currentDate = \date('Y-m-d');
 	if ($values['fromDate'] < $currentDate) {
 	   $form->addError('Datum začátku rezervace musí být alespoň dnešek.');     
-	}
+	}*/
 	
 	if ($values['email'] !='' && !preg_match("/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/", $values['email'])){
 	    $form->addError('Zadejte platný email');

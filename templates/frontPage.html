@@ -43,6 +43,8 @@
 
 
 <section>
+    
+    {if $aktuality}
     <div class="container aktuality">
 
         <div class="row center">
@@ -50,36 +52,21 @@
         </div>
 
         <div class="row ">
-
-            <div class="col-lg-4 aktualita">
-                <h4 class="center">Otevřené sklepy 2016</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    Maecenas libero. Sed elit dui, pellentesque a, faucibus vel,
-                    interdum nec, diam. Vivamus porttitor turpis ac leo.
-                </p>
-            </div>
-
-            <div class="col-lg-4 aktualita">
-                <h4 class="center">Letní otevřené sklepy</h4>
-                <p>
-                    zveme Vás k návštěvě našeho vinařství ve dnech 3.8. až 9.8.2015.
-                    Otevřeno je od 17 do 20 hod v pondělí až čtvrtek po tel. domluvě
-                    s vinařem. O víkendu: Pátek 17 až 20 hod. Sobota 17 až 20 hod.
-                </p>
-            </div>
-
-            <div class="col-lg-4 aktualita">
-                <h4 class="center">Nové ceny ubytování</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    Maecenas libero. Sed elit dui, pellentesque a, faucibus vel,
-
-                </p>
-            </div>
+            
+            {foreach from=$aktuality item=akt}
+            
+                <div class="col-lg-4 aktualita">
+                    <h4 class="center">{$akt['nazev']}</h4>
+                    <p>
+                        {$akt['text']}
+                    </p>
+                </div>
+            
+            {/foreach}
 
         </div>
     </div>
+    {/if}
 </section>
 
 

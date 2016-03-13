@@ -51,6 +51,11 @@ class MainController {
 
         $smarty = Utils::smartyInit();
 
+        
+        
+        
+        $smarty->assign('aktuality', AktualityModel::getLast3());
+        
         //styly pro frontpage jsou v main.css
         //$smarty->assign('style', 'frontPage_style');
         $smarty->display('frontPage.html');

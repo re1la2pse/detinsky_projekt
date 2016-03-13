@@ -80,5 +80,39 @@ class RezervaceModel extends Nette\Object
 
         $this->db->table('rezervace')->where('id', $idRezervace)->update(array('zaloha' => $zaloha));
     }
+    
+    /**
+     * Vraci nazev dane rezervace
+     */
+    public function getNameById($idRezervace) {
+        
+        $rezervace = $this->db->table('rezervace')->where('id', $idRezervace)->fetch();
+        
+        return $rezervace->nazev;
+    }
+    
+    /**
+     * Vraci danou rezervaci podle id
+     */
+    public function getById($idRezervace) {
+        
+        return $this->db->table('rezervace')->where('id', $idRezervace)->fetch();
+    }
+    
+    /*
+     * Aktualizuje rezervaci
+     */
+    public function updateRezervace($idRezervace, $values) {
+        
+        $this->db->table('rezervace')->where('id', $idRezervace)->update(array(
+                            'nazev' => $values['name'],
+                            'odDatum' => $values['fromDate']->format('Y-m-d'),
+                            'doDatum' => $values['toDate']->format('Y-m-d'),
+                            'email' => $values['email'],
+                            'telefon' => $values['phone'],
+                            'pocet_osob' => $values['numberOfPersons'],
+                            'typPokoje' => $values['room']
+                            ));
+    }
 
 }

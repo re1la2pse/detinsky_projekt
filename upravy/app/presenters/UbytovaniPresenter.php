@@ -26,20 +26,32 @@ class UbytovaniPresenter extends BasePresenter
     
     public function rezervaceFormSuccess(Nette\Forms\Form $form) {
         $values = $form->getValues();
-
-        $this->rezervaceModel->newRezervace($values);
         
-        $this->flashMessage("Rezervace vložena");
-        $this->redirect('Ubytovani:prehledRezervace');
-    }
+        $rezervaceId = $this->getParameter('id');
 
-    public function renderRezervace() {
+        if ($rezervaceId) {
+            //Debugger::fireLog('editace');
+            
+            $this->rezervaceModel->updateRezervace($rezervaceId, $values);
+            
+            $this->flashMessage("Rezervace " . $values['name'] . " upravena");
+            $this->redirect('Ubytovani:prehledRezervace');
+            
+        } else {
+            //Debugger::fireLog('nova rezervace');
+            
+            $this->rezervaceModel->newRezervace($values);
+            
+            $this->flashMessage("Rezervace vložena");
+            $this->redirect('Ubytovani:prehledRezervace');
+        }
+    
+            
+        }
+    
+    
 
-        /*foreach($rezervace as $r) {
-            Debugger::dump($r['nazev']);
-        }*/
-
-    }
+    public function renderRezervace() {}
 
     public function actionDeleteRezervace($id) {
 
@@ -69,6 +81,31 @@ class UbytovaniPresenter extends BasePresenter
         $this->template->rezervaceApartman = $this->rezervaceModel->getAktualRezervaceApartman();
         $this->template->currentDate = new Nette\Utils\DateTime();
         $this->template->script = "rezervaceScript";
+    }
+    
+    public function actionEditRezervace($id) {
+        
+        $r = $this->rezervaceModel->getById($id);
+        
+        $this['rezervaceForm']->setDefaults(array('name' => $r->nazev,
+                                                  'fromDate' => $r->odDatum,
+                                                  'toDate' => $r->doDatum,
+                                                  'email' => $r->email,
+                                                  'phone' => $r->telefon,
+                                                  'numberOfPersons' => $r->pocet_osob,
+                                                  'room' => $r->typPokoje
+                                                  ));
+        
+        //Debugger::fireLog($rezervace);
+        
+        
+    }
+    
+    public function renderEditRezervace($id) {
+        
+        $this->template->nameRezervace = $this->rezervaceModel->getNameById($id);
+        
+        Debugger::fireLog($this->rezervaceModel->getNameById($id));
     }
 
 }
