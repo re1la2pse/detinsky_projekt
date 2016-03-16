@@ -57,7 +57,7 @@ p {
     color: #767272;
     font-family: "open_regular", Helvetica, Arial, sans-serif;
     font-size: 16px;
-    text-align: justify;
+    /*text-align: justify;*/
     line-height: 30px;
 }
 

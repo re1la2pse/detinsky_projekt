@@ -4,7 +4,7 @@ namespace Forms;
 use Tracy\Debugger;
 use Nette\Application\UI\Form;
 
-class AktualitaForm extends BaseBT3Form {
+class AktualityForm extends BaseBT3Form {
     
     public function create() {
         
@@ -13,7 +13,7 @@ class AktualitaForm extends BaseBT3Form {
         $form->addText('name', 'Název aktuality')
             ->setRequired('Zadejte název aktuality');
             
-        $form->addTextArea('text', 'Text aktuality')
+        $form->addTextArea('text', 'Text aktuality', 10, 5)
              ->setRequired('Zadejte text aktuality');
              
         $form->addSubmit('send', 'Potvrdit');

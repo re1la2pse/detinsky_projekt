@@ -1,0 +1,30 @@
+{block content}
+
+<div class="container content">
+
+    <div class="row">
+        <div class="col-lg-12">
+             <h2>Seznam aktualit</h2>
+
+             <table class="table table-striped">
+                <tr>
+                    <th>Id</th>
+                    <th>Název aktuality</th>
+                    <th>Aktivní</th>
+                    <th></th>
+                </tr>
+                {foreach $aktuality as $a}
+                        <td>{$a['id']}</td>
+                        <td>{$a['nazev']}</td>
+                        <td><input type="checkbox" name="aktivniAktualita" id={$a['id']} {if $a['aktivni']==1}checked="checked" {/if} /></td>
+                        <td>
+                            <a n:href="Aktuality:delete, 'id' => $a['id']">smazat</a> /
+                            <a n:href="Aktuality:edit, 'id' => $a['id']">editovat</a>
+                        </td>
+                    </tr>
+                {/foreach}
+             </table>
+        </div>
+    </div>
+
+</div>
