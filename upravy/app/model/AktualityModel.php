@@ -31,9 +31,9 @@ class AktualityModel extends Nette\Object
      * Vraci vsechny aktuality ulozene v db
      * @return Nette\Database\Table\Selection
      */
-    public function getAll() {
+    public function getLast3() {
 
-        return $this->db->table('aktuality');
+        return $this->db->table('aktuality')->order('id DESC');
     }
 
     /**
@@ -43,6 +43,24 @@ class AktualityModel extends Nette\Object
     public function delete($id) {
 
         $this->db->table('aktuality')->where('id', $id)->delete();
+    }
+    
+    public function setAktivita($aktivita, $id) {
+        
+        $this->db->table('aktuality')->where('id', $id)->update(array('aktivni' => $aktivita));
+    }
+    
+    public function getById($id) {
+        
+        return $this->db->table('aktuality')->where('id', $id)->fetch();
+    }
+    
+    public function updateaktuality($id, $values) {
+        
+        $this->db->table('aktuality')->where('id', $id)->update(array(
+                            'nazev' => $values['name'],
+                            'text' => $values['text']
+                            ));
     }
 
 }

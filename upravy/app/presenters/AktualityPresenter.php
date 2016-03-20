@@ -27,11 +27,25 @@ class AktualityPresenter extends BasePresenter
 
     public function aktualityFormSuccess(Nette\Forms\Form $form) {
         $values = $form->getValues();
+        
+        
+        $aktualitaId = $this->getParameter('id');
 
-        $this->aktualityModel->newAktualita($values);
+        if ($aktualitaId) {
+            //Debugger::fireLog('editace');
+            
+            $this->aktualityModel->updateAktuality($aktualitaId, $values);
+            
+            $this->flashMessage("aktualita " . $values['name'] . " byla upravena");
+            $this->redirect('Aktuality:prehledAktualit');
+            
+        } else {
 
-        $this->flashMessage("Aktualita vložena");
-        $this->redirect('Aktuality:prehledAktualit');
+            $this->aktualityModel->newAktualita($values);
+    
+            $this->flashMessage("Aktualita vložena");
+            $this->redirect('Aktuality:prehledAktualit');
+        }
 
     }
 
@@ -41,7 +55,8 @@ class AktualityPresenter extends BasePresenter
 
     public function renderPrehledAktualit() {
 
-        $this->template->aktuality = $this->aktualityModel->getAll();
+        $this->template->aktuality = $this->aktualityModel->getLast3();
+        $this->template->script = "aktualityScript";
     }
 
     public function actionDelete($id) {
@@ -49,6 +64,29 @@ class AktualityPresenter extends BasePresenter
 
         $this->flashMessage("Aktualita vymazána");
         $this->redirect('Aktuality:prehledAktualit');
+    }
+    
+    public function handleChangeAktivni($aktivni, $aktualitaId) {
+        
+        //Debugger::fireLog($aktivni);
+        //Debugger::fireLog($aktualitaId);
+        
+        $this->aktualityModel->setAktivita($aktivni, $aktualitaId);
+        
+    }
+    
+    public function actionEdit($id) {
+        
+        $aktualita = $this->aktualityModel->getById($id);
+        
+        $this['aktualityForm']->setDefaults(array('name' => $aktualita->nazev,
+                                                  'text' => $aktualita->text
+                                                  ));
+    }
+    
+    public function renderEdit() {
+        
+        Debugger::dump("edit ");
     }
 
 
