@@ -42,6 +42,11 @@ class MainController {
                 self::kontakt();
                 break;
 
+            //odesilani kontaktniho formulare
+            case "contactForm":
+                self::contactForm();
+                break;
+
             default:
                 self::errorPage();
         }
@@ -58,6 +63,7 @@ class MainController {
         
         //styly pro frontpage jsou v main.css
         //$smarty->assign('style', 'frontPage_style');
+        $smarty->assign('js_script', "contact");
         $smarty->display('frontPage.html');
         exit;
         
@@ -112,6 +118,7 @@ class MainController {
         $smarty = Utils::smartyInit();
 
         $smarty->assign('style', 'kontakt_style');
+        $smarty->assign('js_script', 'contact');
         $smarty->display('kontakt.html');
     }
 
@@ -121,6 +128,43 @@ class MainController {
 
         $smarty = Utils::smartyInit();
         $smarty->display('error.html');
+        exit;
+    }
+
+    /**
+     * Odesila kontaktni formular
+     */
+    public static function contactForm() {
+
+        $mail = new PHPMailer();
+        $mail->CharSet = 'UTF-8';
+
+        //sanitize dat z formulare.
+        //kontrola mailu a tel. cisla na spravny tvar je v js, tady to nekontroluju
+        //nebo bych měl???
+        $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+        $phone = filter_var($_POST['phone'], FILTER_SANITIZE_STRING);
+        $message = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
+
+        $mail->From = $email;
+        $mail->FromName = $name;
+        $mail->AddAddress("petr.mokrusa@centrum.cz");
+
+        $mail->IsHTML(true);
+        $mail->Subject = "Zárybnický sklípek - kontaktní formulář";
+        $mail->Body = "<h3>Zpráva z kontaktního formuláře:</h3>
+                       <p>" . $message . "</p>
+                       <p>" . $name . "</p>
+                       <p>tel.: " . $phone . "</p>";
+
+        $mail->AltBody =  $message . "\n" . $name . "\n tel.: " . $phone;
+
+        if ($mail->send()) {
+            echo "ok";
+        } else {
+            echo "error: " . $mail->ErrorInfo;
+        }
         exit;
     }
 

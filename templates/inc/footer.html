@@ -8,7 +8,7 @@
     <script type="text/javascript" src="media/js/parallax.js"></script>
     <script type="text/javascript" src="media/js/nicescroll.js"></script>-->
     
-    <script type="text/javascript" src="media/js/owl.carousel.min.js"></script>
+    <!--<script type="text/javascript" src="media/js/owl.carousel.min.js"></script>-->
     <script type="text/javascript" src="media/js/main.js"></script>
     <script type="text/javascript" src="media/js/bootstrap.js"></script>
     
@@ -16,7 +16,10 @@
     {if isset($galerie)}
         <script src="media/js/mootools.js"></script>
         <script src="media/js/slimbox.js"></script>
-    {/if}    
+    {/if}
 
+    {if isset($js_script)}
+        <script src="{$ROOT}/media/js/{$js_script}.js"></script>
+    {/if}
     </body>
 </html>

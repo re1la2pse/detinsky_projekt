@@ -12,7 +12,6 @@
             <ul>
                 <li><h3>Provozovatel:</h3></li>
                 <li>Dana Dětinská</li>
-                <li>Tel.: 518 370 188</li>
                 <li>Mobil: +420 603 837 027</li>
                 <li>E-mail: d.detinska@seznam.cz</li>
                 <li><h3>Adresa:</h3></li>
@@ -37,42 +36,43 @@
         <div class="col-lg-8 col-lg-offset-2">
             
 
-                <div class="center">
-                    <h1>NAPIŠTE NÁM</h1>
-                    <h4>Kontaktní formulář</h4>
-                </div>
-    
-                <div class="formErrors"></div>
-                <div class="formSuccess"></div>
-    
-                <form name="sentMessage" id="contactForm">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Vaše jméno *" name="name">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Váš email *" name="email">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group">
-                                <input type="tel" class="form-control" placeholder="Váš telefon *" name="phone">
-                                <p class="help-block text-danger"></p>
-                            </div>
+            <div class="center">
+                <h1>NAPIŠTE NÁM</h1>
+                <h4>Kontaktní formulář</h4>
+            </div>
+
+            <div class="formErrors"></div>
+            <div class="formSuccess"></div>
+
+            <form name="sentMessage" id="contactForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Vaše jméno *" name="name">
+                            <p class="help-block text-danger"></p>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <textarea class="form-control" placeholder="Vaše zpráva *" name="message"></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Váš email *" name="email">
+                            <p class="help-block text-danger"></p>
                         </div>
-                        <div class="clear"></div>
-                        <div class="col-lg-12 text-center">
-                            <button type="submit" class="btn btn-xl">Odeslat zprávu</button>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Váš telefon *" name="phone">
+                            <p class="help-block text-danger"></p>
                         </div>
                     </div>
-                </form>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Vaše zpráva *" name="message"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-12 text-center">
+                        <div id="success"></div>
+                        <button type="submit" class="btn btn-xl">Odeslat zprávu</button>
+                    </div>
+                </div>
+            </form>
             
         </div>
     </div>

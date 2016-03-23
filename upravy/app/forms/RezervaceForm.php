@@ -37,6 +37,14 @@ class RezervaceForm extends BaseBT3Form {
                                              '2' => 'Apartman s kuchyňkou pro 4 osoby'))
         ->setRequired('Prosím vyberte pokoj');
 
+    $form->addSelect('breakfast', 'Snidane:', array('1' => 'ANO',
+                                                    '0' => 'NE'))
+        ->setRequired('Prosím vyberte snidani');
+
+    $form->addSelect('tasting', 'Degustace:', array('1' => 'ANO',
+                                                    '0' => 'NE'))
+        ->setRequired('Prosím vyberte degustaci');
+
 	$form->addSubmit('send', 'Potvrdit');
         
         $form->onValidate[] = array($this, 'validateForm');

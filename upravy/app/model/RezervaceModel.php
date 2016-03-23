@@ -32,7 +32,9 @@ class RezervaceModel extends Nette\Object
             'email' => $values['email'],
             'telefon' => $values['phone'],
             'pocet_osob' => $values['numberOfPersons'],
-            'typPokoje' => $values['room']
+            'typPokoje' => $values['room'],
+            'snidane' => $values['breakfast'],
+            'degustace' => $values['tasting']
         ));
     }
 
@@ -111,7 +113,9 @@ class RezervaceModel extends Nette\Object
                             'email' => $values['email'],
                             'telefon' => $values['phone'],
                             'pocet_osob' => $values['numberOfPersons'],
-                            'typPokoje' => $values['room']
+                            'typPokoje' => $values['room'],
+                            'snidane' => $values['breakfast'],
+                            'degustace' => $values['tasting']
                             ));
     }
 

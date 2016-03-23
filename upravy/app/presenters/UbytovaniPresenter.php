@@ -93,7 +93,9 @@ class UbytovaniPresenter extends BasePresenter
                                                   'email' => $r->email,
                                                   'phone' => $r->telefon,
                                                   'numberOfPersons' => $r->pocet_osob,
-                                                  'room' => $r->typPokoje
+                                                  'room' => $r->typPokoje,
+                                                  'breakfast' => $r->snidane,
+                                                  'tasting' => $r->degustace
                                                   ));
         
         //Debugger::fireLog($rezervace);

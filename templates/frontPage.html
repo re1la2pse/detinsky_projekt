@@ -182,25 +182,29 @@
 
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1">
-                <form name="sentMessage" id="contactForm" novalidate>
+
+                <div class="formErrors"></div>
+                <div class="formSuccess"></div>
+
+                <form name="sentMessage" id="contactForm">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Vaše jméno *" id="name" required data-validation-required-message="Vložte jméno.">
+                                <input type="text" class="form-control" placeholder="Vaše jméno *" name="name">
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Váš email *" id="email" required data-validation-required-message="Vložte email.">
+                                <input type="email" class="form-control" placeholder="Váš email *" name="email">
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input type="tel" class="form-control" placeholder="Váš telefon *" id="phone" required data-validation-required-message="Vložte tel. číslo.">
+                                <input type="tel" class="form-control" placeholder="Váš telefon *" name="phone">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <textarea class="form-control" placeholder="Vaše zpráva *" id="message" required data-validation-required-message="Vložte zprávu."></textarea>
+                                <textarea class="form-control" placeholder="Vaše zpráva *" name="message"></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>

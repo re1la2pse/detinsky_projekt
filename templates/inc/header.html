@@ -18,8 +18,9 @@
     <link rel="stylesheet" type="text/css" href="media/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="media/css/main.css"/>
     <link rel="stylesheet" href="media/css/slimbox/slimbox.css" type="text/css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="media/css/{if isset($style)}{$style}{/if}.css"/>
-
+    {if isset($style)}
+        <link rel="stylesheet" type="text/css" href="media/css/{$style}.css"/>
+    {/if}
 
     
 
