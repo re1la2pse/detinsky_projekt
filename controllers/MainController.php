@@ -33,6 +33,10 @@ class MainController {
             case "ubytovani":
                 self::ubytovani();
             break;
+        
+            case "vinarstvi":
+                self::vinarstvi();
+            break;
 
             case "rezervace":
                 self::rezervace();
@@ -94,6 +98,14 @@ class MainController {
         
         $smarty->assign('style', 'ubytovani_style');
         $smarty->display('ubytovani.html');
+    }
+    
+    public static function vinarstvi() {
+        
+        $smarty = Utils::smartyInit();
+        
+        $smarty->assign('style', 'vinarstvi_style');
+        $smarty->display('vinarstvi.html');
     }
 
     public static function rezervace() {

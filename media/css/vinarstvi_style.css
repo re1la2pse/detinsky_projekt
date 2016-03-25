@@ -1,0 +1,15 @@
+
+p {
+    text-align: justify;
+}
+
+#textBlok1 {
+    margin-top: 5px;
+}
+
+.foto {
+    margin: 13px 0;
+    /*border: 1px solid red;*/
+    width: 255px;
+    height: 170px;
+}

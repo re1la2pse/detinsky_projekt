@@ -70,8 +70,8 @@
                         <td>{$r['pocet_osob']}</td>
                         <td>{if $r['typPokoje'] == 1} Malý pokoj {else} Apartmán {/if}</td>
                         <td><input type="checkbox" name="checkboxZaloha" id={$r['id']} {if $r['zaloha']==1}checked="checked" {/if} /></td>
-                        <td>AAA</td>
-                        <td>AA</td>
+                        <td>{if $r['snidane']}Ano{else}Ne{/if}</td>
+                        <td>{if $r['degustace']}Ano{else}Ne{/if}</td>
                         <td>
                             <a n:href="Ubytovani:deleteRezervace, 'id' => $r['id']">smazat</a> /
                             <a n:href="Ubytovani:editRezervace, 'id' => $r['id']">editovat</a>
