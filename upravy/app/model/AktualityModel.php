@@ -23,7 +23,8 @@ class AktualityModel extends Nette\Object
 
         $this->db->table('aktuality')->insert(array(
             'nazev' => $values['name'],
-            'text' => $values['text']
+            'text' => $values['text'],
+            'aktivni' => 1
         ));
     }
 

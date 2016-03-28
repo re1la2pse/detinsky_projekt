@@ -44,7 +44,11 @@ class MainController {
 
             case "kontakt":
                 self::kontakt();
-                break;
+            break;
+            
+            case "degustace":
+                self::degustace();
+            break;
 
             //odesilani kontaktniho formulare
             case "contactForm":
@@ -133,6 +137,15 @@ class MainController {
         $smarty->assign('js_script', 'contact');
         $smarty->display('kontakt.html');
     }
+    
+    public static function degustace() {
+
+        $smarty = Utils::smartyInit();
+
+        $smarty->assign('style', 'degustace_style');
+        $smarty->display('degustace.html');
+    }
+    
 
     public static function errorPage() {
 

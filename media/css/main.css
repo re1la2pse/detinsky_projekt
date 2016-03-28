@@ -134,7 +134,7 @@ header #navigace{
 
 header #navigace li{
 	float: left;
-	margin-left: 20px;
+	margin-left: 10px;
 }
 
 header #navigace li:first-child{
