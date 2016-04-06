@@ -126,6 +126,7 @@ class MainController {
         //$smarty->assign('pom', RezervaceModel::getBusyDay(2, 2016));
 
         $smarty->assign('style', 'rezervace_style');
+        $smarty->assign('js_script', 'rezervace');
         $smarty->display('rezervace.html');
     }
 

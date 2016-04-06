@@ -22,7 +22,7 @@ $(function() {
         }
 
         //Kontrola tel. čísla. Vždycky se najde nějaký ocas, který tam zadá nějaků pičovinu
-        var pattern =/^[0-9]{9,}$/;
+        var pattern =/^(\+\d{3})? ?\d{3} ?\d{3} ?\d{3}$/;
         if(!pattern.test(phone)) {
             //console.log("spatne cislo tel");
             formErrors.append("<p>Zadejte telefon ve správném tvaru.</p>");
@@ -37,10 +37,10 @@ $(function() {
             return false
         }
 
-        console.log(name);
+        /*console.log(name);
         console.log(email);
         console.log(phone);
-        console.log(message);
+        console.log(message);*/
 
 
         //Formular byl vyplneny spravne, muzu odeslat
