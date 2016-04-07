@@ -53,7 +53,11 @@ class MainController {
             //odesilani kontaktniho formulare
             case "contactForm":
                 self::contactForm();
-                break;
+            break;
+
+            case "rezervaceForm":
+                self::rezervaceForm();
+            break;
 
             default:
                 self::errorPage();
@@ -185,6 +189,64 @@ class MainController {
                        <p>tel.: " . $phone . "</p>";
 
         $mail->AltBody =  $message . "\n" . $name . "\n tel.: " . $phone;
+
+        if ($mail->send()) {
+            echo "ok";
+        } else {
+            echo "error: " . $mail->ErrorInfo;
+        }
+        exit;
+    }
+
+    /**
+     * Odesila rezervacni formular
+     */
+    public static function rezervaceForm() {
+
+        $mail = new PHPMailer();
+        $mail->CharSet = 'UTF-8';
+
+        $jmeno = filter_var($_POST['jmeno'], FILTER_SANITIZE_STRING);
+        $prijmeni = filter_var($_POST['prijmeni'], FILTER_SANITIZE_STRING);
+        $tel = filter_var($_POST['tel'], FILTER_SANITIZE_STRING);
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+        $pocetOsob = filter_var($_POST['pocetOsob'], FILTER_SANITIZE_STRING);
+        $datumPrijezdu = filter_var($_POST['datumPrijezdu'], FILTER_SANITIZE_STRING);
+        $datumOdjezdu = filter_var($_POST['datumOdjezdu'], FILTER_SANITIZE_STRING);
+        $typPokoje = filter_var($_POST['typPokoje'], FILTER_SANITIZE_STRING);
+        $snidane = filter_var($_POST['snidane'], FILTER_SANITIZE_STRING);
+        $degustace = filter_var($_POST['degustace'], FILTER_SANITIZE_STRING);
+
+        $mail->From = $email;
+        $mail->FromName = $jmeno;
+        $mail->AddAddress("petr.mokrusa@centrum.cz");
+
+        $mail->IsHTML(true);
+        $mail->Subject = "Zárybnický sklípek - rezervační formulář";
+        $mail->Body = "<h3>Zpráva z rezervačního formuláře:</h3>
+                       <p> Jméno: " . $jmeno . "</p>
+                       <p> Přijmení: " . $prijmeni . "</p>
+                       <p> Telefon: " . $tel . "</p>
+                       <p> Email: " . $email . "</p>
+                       <p> Počet osob: " . $pocetOsob . "</p>
+                       <p> Datum příjezdu: " . $datumPrijezdu . "</p>
+                       <p> Datum odjezdu: " . $datumOdjezdu . "</p>
+                       <p> Typ Pokoje: " . ($typPokoje == 1) ? "pokoje bez kuchyňky" : "apartmán s kuchyňkou" . "</p>
+                       <p> snidane: " . $snidane . "</p>
+                       <p> degustace: " . $degustace . "</p>";
+
+
+        $mail->AltBody ="Zpráva z rezervačního formuláře: \n
+                        Jméno: " . $jmeno . "\n
+                        Přijmení: " . $prijmeni . "\n
+                        Telefon: " . $tel . "\n
+                        Email: " . $email . "\n
+                        Počet osob: " . $pocetOsob . "\n
+                        Datum příjezdu: " . $datumPrijezdu . "\n
+                        Datum odjezdu: " . $datumOdjezdu . "\n
+                        Typ Pokoje: " . ($typPokoje == 1) ? "pokoje bez kuchyňky" : "apartmán s kuchyňkou" . "\n
+                        snidane: " . $snidane . "\n
+                        degustace: " . $degustace . "\n";
 
         if ($mail->send()) {
             echo "ok";

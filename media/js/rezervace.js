@@ -27,7 +27,7 @@ $(function() {
 
 
 
-        console.log('\n jmeno: ' + jmeno);
+       /* console.log('\n jmeno: ' + jmeno);
         console.log('\n prijmeni: ' + prijmeni);
         console.log('\n tel: ' + tel);
         console.log('\n email: ' + email);
@@ -36,15 +36,15 @@ $(function() {
         console.log('\n datumOdjezdu: ' + datumOdjezdu);
         console.log('\n typPokoje: ' + typPokoje);
         console.log('\n snidane: ' + snidane);
-        console.log('\n degustace: ' + degustace);
+        console.log('\n degustace: ' + degustace);*/
 
-        /*if (jmeno == "" || prijmeni == "" || tel == "" || email == "" || datumOdjezdu == "" || datumPrijezdu == ""
+        if (jmeno == "" || prijmeni == "" || tel == "" || email == "" || datumOdjezdu == "" || datumPrijezdu == ""
             || typPokoje == "" || snidane == "" || degustace == "") {
             //console.log("neco je prazdne");
             formErrors.append("<p>Prosíme, vyplňte všechny pole.</p>");
             return false;
         }
-*/
+
         var pattern =/^(\+\d{3})? ?\d{3} ?\d{3} ?\d{3}$/;
         if(!pattern.test(tel)) {
             //console.log("spatne cislo tel");
@@ -74,6 +74,40 @@ $(function() {
         }
 
         //formular byl vyplnen spravne, muzu odeslat
+        $.ajax({
+            //na produkcnim jen url: "rezervaceForm"
+            url: "/detinsky_projekt/rezervaceForm",
+            type: "POST",
+            data: {
+                jmeno: jmeno,
+                prijmeni: datumPrijezdu,
+                tel: tel,
+                email: email,
+                pocetOsob: pocetOsob,
+                datumPrijezdu: datumPrijezdu,
+                datumOdjezdu: datumOdjezdu,
+                typPokoje: typPokoje,
+                snidane: snidane,
+                degustace: degustace
+            },
+            cache: false,
+            success: function(value) {
+
+                if(value == "ok") {
+                    formSuccess.append("<p>Vaše zpráva byla úspěšne odeslána.</p>");
+                    console.log("odesláno");
+                }
+                else {
+                    formErrors.append("<p>Zprávu se nepodařilo odeslat, zkuste to později..</p>");
+                    console.log(value);
+                }
+                form[0].reset();
+            },
+            error: function() {
+                console.log("rezervaceForm error");
+            }
+        });
+
 
         return false;
     });
