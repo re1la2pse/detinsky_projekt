@@ -350,9 +350,15 @@ div.aktualita {
 	
 }
 
-@media (max-width: 741px) {
+@media (max-width: 991px) {
     header {
 	height: 100px;
+    }
+}
+
+@media (max-width: 469px) {
+    header {
+	height: 150px;
     }
 
 }

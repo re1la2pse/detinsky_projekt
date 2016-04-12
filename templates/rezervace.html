@@ -13,103 +13,123 @@
            </p>
            <p>
                Rezervaci provádějte nejpozději týden před plánovaným příjezdem. Provozovatel ubytování
-               Vás bude, po zpracování rezervace, kontaktovat a potvrdí Vám termín ubytování.
+               Vás bude po zpracování rezervace kontaktovat a potvrdí Vám termín ubytování.
                Je možné provést rezervaci i na již obsazený termín (viz. kalendář) a v případě, že by se daný
                termín uvolnil, Vás bude provozovatel kontaktovat.
            </p>
         </div>
     </div>
-
-    <div class="row" id="rezervaceFormBlok">
-        <div class="col-sm-5 col-md-5 col-lg-offset-1 col-lg-4">
-
+    
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-10">
+    
             <div class="formErrors"></div>
             <div class="formSuccess"></div>
-
+    
             <form role="form" id="rezervaceForm">
-                <div class="form-group">
-                    <label for="jmeno">Jméno:</label>
-                    <input type="text" name="jmeno" class="form-control" id="jmeno">
+                
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="jmeno">Jméno:</label>
+                            <input type="text" name="jmeno" class="form-control" id="jmeno">
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="prijmeni">Příjmení:</label>
+                            <input type="text" name="prijmeni" class="form-control" id="prijmeni">
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="tel">Telefon:</label>
+                            <input type="text" name="tel" class="form-control" id="tel">
+                        </div>
+                        
+                    </div>
+                    <div class="col-lg-4">    
+        
+                        <div class="form-group">
+                            <label for="mail">E-mail:</label>
+                            <input type="text" name="mail" class="form-control" id="mail">
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="pocetOsob">Počet osob:</label>
+                            <input type="text" name="pocetOsob" class="form-control" id="pocetOsob">
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="datumOd">Datum příjezdu:</label>
+                            <input type="text" name="datumOd" class="form-control" id="datumOd">
+                        </div>
+                        
+                    </div>
+                    <div class="col-lg-4">    
+        
+                        <div class="form-group">
+                            <label for="datumDo">Datum odjezdu:</label>
+                            <input type="text" name="datumDo" class="form-control" id="datumDo">
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="pokoj">Typ pokoje:</label>
+                            <select name="typPokoje" class="form-control" id="pokoj">
+                                <option value="1">Pokoj bez kuchyňky pro 2 osoby</option>
+                                <option value="2">Apartmán s kuchyňkou pro 4 osoby</option>
+                            </select>
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="snidane">Snídaně:</label>
+                            <select name="snidane" class="form-control" id="snidane">
+                                <option value="ANO">ANO</option>
+                                <option value="NE">NE</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <div class="col-lg-4"> 
+        
+                        <div class="form-group">
+                            <label for="degustace">Degustace:</label>
+                            <select name="degustace" class="form-control" id="degustace">
+                                <option value="ANO">ANO</option>
+                                <option value="NE">NE</option>
+                            </select>
+                        </div>
+                    
+                    </div>
+                    <div class="col-lg-4">     
+                        
+                        <button type="submit" class="btn btn-default btn-rezervace">Odeslat</button>
+                       
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="prijmeni">Příjmení:</label>
-                    <input type="text" name="prijmeni" class="form-control" id="prijmeni">
-                </div>
-
-                <div class="form-group">
-                    <label for="tel">Telefon:</label>
-                    <input type="text" name="tel" class="form-control" id="tel">
-                </div>
-
-                <div class="form-group">
-                    <label for="mail">E-mail:</label>
-                    <input type="text" name="mail" class="form-control" id="mail">
-                </div>
-
-                <div class="form-group">
-                    <label for="pocetOsob">Počet osob:</label>
-                    <input type="text" name="pocetOsob" class="form-control" id="pocetOsob">
-                </div>
-
-                <div class="form-group">
-                    <label for="datumOd">Datum příjezdu:</label>
-                    <input type="text" name="datumOd" class="form-control" id="datumOd">
-                </div>
-
-                <div class="form-group">
-                    <label for="datumDo">Datum odjezdu:</label>
-                    <input type="text" name="datumDo" class="form-control" id="datumDo">
-                </div>
-
-                <div class="form-group">
-                    <label for="pokoj">Typ pokoje:</label>
-                    <select name="typPokoje" class="form-control" id="pokoj">
-                        <option value="1">Pokoj bez kuchyňky pro 2 osoby</option>
-                        <option value="2">Apartmán s kuchyňkou pro 4 osoby</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="snidane">Snidane:</label>
-                    <select name="snidane" class="form-control" id="snidane">
-                        <option value="ANO">ANO</option>
-                        <option value="NE">NE</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="degustace">Degustace:</label>
-                    <select name="degustace" class="form-control" id="degustace">
-                        <option value="ANO">ANO</option>
-                        <option value="NE">NE</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn btn-default">Odeslat</button>
             </form>
-        </div>
-
-            <div id="calendarColumn" class="col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-1 col-lg-offset-1 col-lg-5">
-
-                <h4>Kalendář rezervace pro apartmán s kuchyňkou <br /> (4 osoby)</h4>
-                <p>
-                    {$kalendarApartman}
-                </p>
-
-                <br />
-                <h4>Kalendář rezervace pro pokoj bez kuchyňky <br /> (2 osoby)</h4>
-                <p>
-                    {$kalendarMalyPokoj}
-                </p>
-            </div>
-
         </div>
     </div>
 
-    <p>
-
-    </p>
+    <div class="row">
+        <div class="kalendar_blok">
+            <div class="col-lg-5 col-lg-offset-1">
+                <div id="kalendar1">
+                    <h4>Kalendář rezervace pro apartmán s kuchyňkou <br /> (4 osoby)</h4>
+                    
+                        {$kalendarApartman}
+                    
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div id="kalendar2">
+                    <h4>Kalendář rezervace pro pokoj bez kuchyňky <br /> (2 osoby)</h4>
+                    
+                        {$kalendarMalyPokoj}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
 </div>
 

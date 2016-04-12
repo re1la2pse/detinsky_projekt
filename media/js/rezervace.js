@@ -3,8 +3,8 @@ $(function() {
     //console.log('rezervace');
 
     var form = $('#rezervaceForm');
-    var formErrors = $("#rezervaceFormBlok div.formErrors");
-    var formSuccess = $("#rezervaceFormBlok div.formSuccess");
+    var formErrors = $("div.formErrors");
+    var formSuccess = $("div.formSuccess");
 
     form.submit(function() {
 
@@ -64,12 +64,12 @@ $(function() {
         var pattern = /^([1-9]|[12][0-9]|3[01])\.([1-9]|1[012])\.[0-9]{4}$/;
         if(!pattern.test(datumPrijezdu)){
             //console.log("spatny email");
-            formErrors.append("<p>Zadejte prosím datum příjezdu ve tvaru dd.mm.rrrr.</p>");
+            formErrors.append("<p>Zadejte prosím datum příjezdu ve správném tvaru (d.m.rrrr)</p>");
             return false
         }
         if(!pattern.test(datumOdjezdu)){
             //console.log("spatny email");
-            formErrors.append("<p>Zadejte prosím datum odjezdu ve tvaru dd.mm.rrrr.</p>");
+            formErrors.append("<p>Zadejte prosím datum odjezdu ve správném tvaru (d.m.rrrr)</p>");
             return false
         }
 

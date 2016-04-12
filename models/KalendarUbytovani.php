@@ -119,7 +119,7 @@ class KalendarUbytovani {
         $nadpis = $this->mesicCesky().' '.$this->datum->format('Y');//vytvoření nadpisu - měsíc a rok
         //formátování
         return <<<EOT
-<table id="calendar">
+<table class="calendar">
     <thead>
          <tr>
                 <th><a href="rezervace?mesic=$odkazy[0]&rok=$odkazy[1]"><</a></th>
